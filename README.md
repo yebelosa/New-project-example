@@ -1,2 +1,2 @@
 # clean-architecture-example
-Example of what clean architecture would look like (in Java)
+Example project to show what Clean Architecture would look like (in Java)
