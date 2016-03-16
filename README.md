@@ -14,6 +14,10 @@ Example project to show what Clean Architecture would look like (in Java)
 ```
     ./gradlew bootRun
 ```
+- running the application (in the IDE): open and run the main class
+```
+    com.clean.example.configuration.Application
+```
 - more info on available tasks:
 ```
     ./gradlew tasks
