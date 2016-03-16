@@ -2,7 +2,7 @@ package com.clean.example.entrypoints;
 
 import org.junit.Test;
 
-public class ExampleTest {
+public class HelloWorldEndpointTest {
 
     @Test
     public void testName() throws Exception {

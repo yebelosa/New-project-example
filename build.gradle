@@ -26,6 +26,10 @@ subprojects {
 
             spring_boot     : [
                     "org.springframework.boot:spring-boot-starter-web:${springboot_version}"
+            ],
+
+            rest     : [
+                    "com.sun.jersey:jersey-server:1.19.1"
             ]
     ]
 }

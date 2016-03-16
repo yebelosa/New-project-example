@@ -3,5 +3,7 @@ description = "Ways to interact with the application (e.g. Rest APIs, Jobs, GUIs
 dependencies {
     compile project(":application:core")
 
+    compile libs.rest
+
     testCompile libs.unit_tests
 }
