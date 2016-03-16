@@ -14,3 +14,7 @@ Example project to show what Clean Architecture would look like (in Java)
 ```
     ./gradlew bootRun
 ```
+- more info on available tasks:
+```
+    ./gradlew tasks
+```
