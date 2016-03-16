@@ -1,15 +1,21 @@
-apply plugin: 'java'
+description = "Clean Architecture Example"
 
-sourceCompatibility = JavaVersion.VERSION_1_8
+subprojects {
+    apply plugin: 'java'
 
-repositories {
-    mavenCentral()
-}
+    sourceCompatibility = JavaVersion.VERSION_1_8
 
-dependencies {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
 
-    testCompile 'junit:junit:4.+'
-    testCompile 'org.assertj:assertj-core:3.3.0'
+    ext.libs = [
+            unit_tests: [
+                    "junit:junit:4.+",
+                    "org.assertj:assertj-core:3.3.0"
+            ]
+    ]
 }
 
 task wrapper(type: Wrapper) {
