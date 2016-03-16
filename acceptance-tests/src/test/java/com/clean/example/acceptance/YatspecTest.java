@@ -6,7 +6,7 @@ import com.googlecode.yatspec.state.givenwhenthen.WithTestState;
 import org.junit.runner.RunWith;
 
 @RunWith(SpecRunner.class)
-public class YatspecTest implements WithTestState {
+/* package */ abstract class YatspecTest implements WithTestState {
 
     private final TestState testState = new TestState();
 
