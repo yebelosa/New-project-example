@@ -8,12 +8,19 @@ subprojects {
     repositories {
         mavenLocal()
         mavenCentral()
+        maven {
+            url "http://repo.bodar.com"
+        }
     }
 
     ext.libs = [
             unit_tests: [
                     "junit:junit:4.+",
                     "org.assertj:assertj-core:3.3.0"
+            ],
+
+            acceptance_tests: [
+                    'com.googlecode.yatspec:yatspec:217'
             ]
     ]
 }

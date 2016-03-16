@@ -10,4 +10,5 @@ test {
 
 dependencies {
     testCompile libs.unit_tests
+    testCompile libs.acceptance_tests
 }
