@@ -1,5 +1,7 @@
 description = "Retrieve data from whatever source (db, 3rd party, etc.)"
 
 dependencies {
+    compile project(":application:core")
+
     testCompile libs.unit_tests
 }

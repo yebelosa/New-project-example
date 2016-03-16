@@ -9,6 +9,8 @@ test {
 }
 
 dependencies {
+    compile project(":application:configuration")
+
     testCompile libs.unit_tests
     testCompile libs.acceptance_tests
 }

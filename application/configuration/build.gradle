@@ -19,6 +19,10 @@ jar {
 }
 
 dependencies {
+    compile project(":application:core")
+    compile project(":application:dataproviders")
+    compile project(":application:entrypoints")
+
     compile libs.spring_boot
 
     testCompile libs.unit_tests
