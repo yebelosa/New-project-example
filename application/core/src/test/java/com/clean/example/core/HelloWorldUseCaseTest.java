@@ -1,8 +1,8 @@
-package com.clean.example.dataproviders;
+package com.clean.example.core;
 
 import org.junit.Test;
 
-public class ExampleTest {
+public class HelloWorldUseCaseTest {
 
     @Test
     public void testName() throws Exception {

@@ -15,21 +15,24 @@ subprojects {
     }
 
     ext.libs = [
-            unit_tests      : [
+            unit_tests         : [
                     "junit:junit:4.+",
                     "org.assertj:assertj-core:3.3.0"
             ],
 
-            acceptance_tests: [
+            acceptance_tests   : [
                     "com.googlecode.yatspec:yatspec:217"
             ],
 
-            spring_boot     : [
+            spring_boot        : [
                     "org.springframework.boot:spring-boot-starter-web:${springboot_version}"
             ],
 
-            rest     : [
-                    "com.sun.jersey:jersey-server:1.19.1"
+            rest_api           : [
+                    "javax.ws.rs:javax.ws.rs-api:2.0.1"
+            ],
+            rest_implementation: [
+                    "org.springframework.boot:spring-boot-starter-jersey:${springboot_version}"
             ]
     ]
 }
