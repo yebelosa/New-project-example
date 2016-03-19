@@ -24,7 +24,6 @@ dependencies {
     compile project(":application:entrypoints")
 
     compile libs.spring_boot
-    compile libs.rest_implementation
 
     testCompile libs.unit_tests
 }

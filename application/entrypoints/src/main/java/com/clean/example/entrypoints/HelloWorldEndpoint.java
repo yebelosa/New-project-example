@@ -1,14 +1,12 @@
 package com.clean.example.entrypoints;
 
 import com.clean.example.core.HelloWorldUseCase;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-
-@Path("/hello")
+@RestController
 public class HelloWorldEndpoint {
 
     private HelloWorldUseCase helloWorldUseCase;
@@ -17,8 +15,7 @@ public class HelloWorldEndpoint {
         this.helloWorldUseCase = helloWorldUseCase;
     }
 
-    @GET
-    @Produces(APPLICATION_JSON)
+    @RequestMapping(value = "/hello", method = GET)
     public ExampleDto hello(){
         String message = helloWorldUseCase.sayHello("clean architecture");
         return new ExampleDto(message);
