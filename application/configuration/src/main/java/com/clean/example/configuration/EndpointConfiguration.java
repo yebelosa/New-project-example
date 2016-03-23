@@ -1,6 +1,6 @@
 package com.clean.example.configuration;
 
-import com.clean.example.core.HelloWorldUseCase;
+import com.clean.example.core.usecase.HelloWorldUseCase;
 import com.clean.example.entrypoints.HelloWorldEndpoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
