@@ -11,9 +11,17 @@ test {
 // we want to run the integration tests after the acceptance tests, to follow the testing pyramid
 test.mustRunAfter(":acceptance-tests:test")
 
-dependencies {
-    compile project(":application:configuration")
+// we must copy the h2-schema.sql script into the resources folder of this module in order for the tests
+// to be able to create the in-memory database successfull when initialising the connection
+task copyTestResources(type: Copy) {
+    from "${project(':application:dataproviders').buildDir}/resources/main/h2-schema.sql"
+    into "${buildDir}/resources/test"
+}
+processTestResources.dependsOn copyTestResources
 
+
+dependencies {
+    testCompile project(":application:configuration")
     testCompile project(":acceptance-tests")
     testCompile libs.unit_tests
     testCompile libs.acceptance_tests
