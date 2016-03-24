@@ -8,6 +8,11 @@ test {
     }
 }
 
+// we want to run the end-to-end tests for last, to follow the testing pyramid
+test.mustRunAfter(
+        ":integration-tests:build"
+)
+
 dependencies {
     compile project(":application:configuration")
 

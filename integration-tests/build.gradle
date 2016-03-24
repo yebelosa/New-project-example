@@ -8,6 +8,9 @@ test {
     }
 }
 
+// we want to run the integration tests after the acceptance tests, to follow the testing pyramid
+test.mustRunAfter(":acceptance-tests:build")
+
 dependencies {
     compile project(":application:configuration")
 

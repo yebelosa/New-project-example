@@ -8,6 +8,14 @@ test {
     }
 }
 
+// we want to run the acceptance tests after the unit tests, to follow the testing pyramid
+test.mustRunAfter(
+        ":application:configuration:build",
+        ":application:core:build",
+        ":application:dataproviders:build",
+        ":application:entrypoints:build"
+)
+
 dependencies {
     compile project(":application:configuration")
     compile libs.unit_tests
