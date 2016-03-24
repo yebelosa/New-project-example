@@ -9,3 +9,4 @@ include "application:configuration"
 // testing
 include "acceptance-tests"
 include "integration-tests"
+include "end-to-end-tests"
