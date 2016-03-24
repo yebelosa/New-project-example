@@ -2,12 +2,15 @@ package com.clean.example.entrypoints.user;
 
 import com.clean.example.core.domain.User;
 import com.clean.example.core.usecase.user.FindAllUsersUseCase;
+import com.clean.example.core.usecase.user.NoUsersFoundException;
+import com.clean.example.entrypoints.exception.NotFoundException;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -31,9 +34,20 @@ public class FindAllUsersEndpointTest {
         thenUserHasBeenReturned(allUsers, "FirstName2", "LastName2");
     }
 
+    @Test
+    public void throwsNotFoundExceptionWhenNoUserIsFound() throws Exception {
+        givenNoUserIsFound();
+
+        assertThatExceptionOfType(NotFoundException.class).isThrownBy(() -> findAllUsersEndpoint.getAllUsers());
+    }
+
     private void givenThereAreUsers(User... users) {
         List<User> allUsers = Arrays.asList(users);
         when(findAllUsersUseCase.findAllUsers()).thenReturn(allUsers);
+    }
+
+    private void givenNoUserIsFound() {
+        when(findAllUsersUseCase.findAllUsers()).thenThrow(new NoUsersFoundException());
     }
 
     private User user(String username, String firstName, String lastName) {

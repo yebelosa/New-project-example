@@ -8,3 +8,4 @@ include "application:configuration"
 
 // testing
 include "acceptance-tests"
+include "integration-tests"
