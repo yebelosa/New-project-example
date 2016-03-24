@@ -13,7 +13,13 @@ public class FindAllUsersUseCase {
     }
 
     public List<User> findAllUsers() {
-        return findAllUsers.findAllUsers();
+        List<User> allUsers = findAllUsers.findAllUsers();
+
+        if(allUsers.isEmpty()) {
+            throw new NoUsersFoundException();
+        }
+
+        return allUsers;
     }
 
 }

@@ -3,10 +3,12 @@ package com.clean.example.core.usecase.user;
 import com.clean.example.core.domain.User;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -30,9 +32,20 @@ public class FindAllUsersUseCaseTest {
         thenUserHasBeenReturned(allUsers, "username2", "FirstName2", "LastName2");
     }
 
+    @Test
+    public void exceptionWhenNoUsersAreFound() throws Exception {
+        givenNoUsersAreFound();
+
+        assertThatExceptionOfType(NoUsersFoundException.class).isThrownBy(() -> findAllUsersUseCase.findAllUsers());
+    }
+
     private void givenThereAreUsers(User... users) {
         List<User> allUsers = Arrays.asList(users);
         when(findAllUsers.findAllUsers()).thenReturn(allUsers);
+    }
+
+    private void givenNoUsersAreFound() {
+        when(findAllUsers.findAllUsers()).thenReturn(new ArrayList<>());
     }
 
     private User user(String username, String firstName, String lastName) {
