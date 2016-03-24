@@ -28,7 +28,8 @@ subprojects {
 
             integration_test       : [
                     "org.springframework:spring-test:${spring_version}",
-                    "org.skyscreamer:jsonassert:1.3.0"
+                    "org.skyscreamer:jsonassert:1.3.0",
+                    "com.cedarsoftware:json-io:4.4.0"
             ],
 
             spring_boot            : [

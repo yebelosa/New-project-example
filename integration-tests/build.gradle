@@ -11,6 +11,8 @@ test {
 dependencies {
     compile project(":application:configuration")
 
+    testCompile project(":acceptance-tests")
     testCompile libs.unit_tests
+    testCompile libs.acceptance_tests
     testCompile libs.integration_test
 }

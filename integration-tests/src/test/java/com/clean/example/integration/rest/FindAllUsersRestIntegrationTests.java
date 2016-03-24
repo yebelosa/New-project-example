@@ -1,5 +1,6 @@
 package com.clean.example.integration.rest;
 
+import com.clean.example.acceptance.YatspecTest;
 import com.clean.example.core.domain.User;
 import com.clean.example.core.usecase.user.FindAllUsersUseCase;
 import com.clean.example.core.usecase.user.NoUsersFoundException;
@@ -15,20 +16,19 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.cedarsoftware.util.io.JsonWriter.formatJson;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-public class FindAllUsersRestIntegrationTests {
-
-    // TODO make into a yastspec test
+public class FindAllUsersRestIntegrationTests extends YatspecTest {
 
     FindAllUsersUseCase findAllUsersUseCase = mock(FindAllUsersUseCase.class);
 
     MockMvc mockMvc;
-    private String responseContent;
-    private int status;
+    String responseContent;
+    int responseStatusCode;
 
     @Before
     public void setUp() throws Exception {
@@ -64,24 +64,29 @@ public class FindAllUsersRestIntegrationTests {
         allUsers.add(new User("username2", "FirstName2", "LastName2"));
 
         when(findAllUsersUseCase.findAllUsers()).thenReturn(allUsers);
+        log("Users", allUsers);
     }
 
     private void givenThereAreNoUsers() {
         when(findAllUsersUseCase.findAllUsers()).thenThrow(new NoUsersFoundException());
+        log("Users", "");
     }
 
     private void whenTheFindAllUserApiIsCalled() throws Exception {
+        log("Request Path", FindAllUsersEndpoint.API_PATH);
         MvcResult mvcResult = mockMvc.perform(get(FindAllUsersEndpoint.API_PATH))
                 .andReturn();
         responseContent = mvcResult.getResponse().getContentAsString();
-        status = mvcResult.getResponse().getStatus();
+        responseStatusCode = mvcResult.getResponse().getStatus();
+        log("Response: Status Code", responseStatusCode);
     }
 
     private void thenTheResponseIsSuccessful() {
-        assertThat(status).isEqualTo(200);
+        assertThat(responseStatusCode).isEqualTo(200);
     }
 
     private void thenAllUsersAreReturned() throws JSONException {
+        log("Response: Content", formatJson(responseContent));
         String expectedResponse =
                 "[\n" +
                 "    {\n" +
@@ -97,7 +102,7 @@ public class FindAllUsersRestIntegrationTests {
     }
 
     private void thenTheResponseStatusCodeIs404() {
-        assertThat(status).isEqualTo(404);
+        assertThat(responseStatusCode).isEqualTo(404);
     }
 
 }
