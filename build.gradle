@@ -23,7 +23,7 @@ subprojects {
             ],
 
             acceptance_tests       : [
-                    "com.googlecode.yatspec:yatspec:217"
+                    "com.googlecode.yatspec:yatspec:1.20"
             ],
 
             integration_test       : [

@@ -5,6 +5,7 @@ import com.clean.example.core.domain.User;
 import com.clean.example.core.usecase.user.FindAllUsers;
 import com.clean.example.core.usecase.user.FindAllUsersUseCase;
 import com.clean.example.core.usecase.user.NoUsersFoundException;
+import com.googlecode.yatspec.junit.Notes;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@Notes("Finds all user in the system")
 public class FindAllUsersAcceptanceTest extends YatspecTest {
 
     FindAllUsers findAllUsers = mock(FindAllUsers.class);
