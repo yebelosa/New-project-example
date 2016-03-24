@@ -9,9 +9,7 @@ test {
 }
 
 // we want to run the end-to-end tests for last, to follow the testing pyramid
-test.mustRunAfter(
-        ":integration-tests:build"
-)
+test.mustRunAfter(":integration-tests:test")
 
 dependencies {
     compile project(":application:configuration")

@@ -10,10 +10,10 @@ test {
 
 // we want to run the acceptance tests after the unit tests, to follow the testing pyramid
 test.mustRunAfter(
-        ":application:configuration:build",
-        ":application:core:build",
-        ":application:dataproviders:build",
-        ":application:entrypoints:build"
+        ":application:configuration:test",
+        ":application:core:test",
+        ":application:dataproviders:test",
+        ":application:entrypoints:test"
 )
 
 dependencies {
