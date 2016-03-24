@@ -1,7 +1,7 @@
 package com.clean.example.configuration;
 
-import com.clean.example.core.usecase.GetAllExamples;
-import com.clean.example.core.usecase.HelloWorldUseCase;
+import com.clean.example.core.usecase.GetAllUsers;
+import com.clean.example.core.usecase.GetAllUsersUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 public class UseCaseConfiguration {
 
     @Bean
-    public HelloWorldUseCase helloWorldUseCase(GetAllExamples getAllExamples) {
-        return new HelloWorldUseCase(getAllExamples);
+    public GetAllUsersUseCase helloWorldUseCase(GetAllUsers getAllExamples) {
+        return new GetAllUsersUseCase(getAllExamples);
     }
 
 }

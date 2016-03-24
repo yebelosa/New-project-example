@@ -1,7 +1,7 @@
 package com.clean.example.configuration;
 
-import com.clean.example.core.usecase.HelloWorldUseCase;
-import com.clean.example.entrypoints.HelloWorldEndpoint;
+import com.clean.example.core.usecase.GetAllUsersUseCase;
+import com.clean.example.entrypoints.GetAllUsersEndpoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 public class EndpointConfiguration {
 
     @Bean
-    public HelloWorldEndpoint helloWorldEndpoint(HelloWorldUseCase helloWorldUseCase) {
-        return new HelloWorldEndpoint(helloWorldUseCase);
+    public GetAllUsersEndpoint helloWorldEndpoint(GetAllUsersUseCase helloWorldUseCase) {
+        return new GetAllUsersEndpoint(helloWorldUseCase);
     }
 
 }
