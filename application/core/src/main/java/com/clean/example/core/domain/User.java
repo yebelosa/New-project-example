@@ -1,5 +1,7 @@
 package com.clean.example.core.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class User {
 
     private final String username;
@@ -22,5 +24,10 @@ public class User {
 
     public String getLastName() {
         return lastName;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

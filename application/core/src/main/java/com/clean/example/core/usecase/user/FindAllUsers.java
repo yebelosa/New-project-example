@@ -4,8 +4,8 @@ import com.clean.example.core.domain.User;
 
 import java.util.List;
 
-public interface GetAllUsers {
+public interface FindAllUsers {
 
-    List<User> getAllUsers();
+    List<User> findAllUsers();
 
 }

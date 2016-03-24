@@ -28,7 +28,7 @@ public class GetAllExamplesFromDatabaseDataProviderTest {
                 userRow("username2", "FirstName2", "LastName2")
         );
 
-        List<User> allUsers = getAllExamplesFromDatabaseDataProvider.getAllUsers();
+        List<User> allUsers = getAllExamplesFromDatabaseDataProvider.findAllUsers();
 
         assertThat(allUsers).hasSize(2);
         thenUserHasBeenReturned(allUsers, "username1", "FirstName1", "LastName1");

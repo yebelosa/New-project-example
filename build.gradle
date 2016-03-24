@@ -42,6 +42,10 @@ subprojects {
 
             database               : [
                     "org.springframework:spring-jdbc:${spring_version}"
+            ],
+
+            string_utils           : [
+                    "org.apache.commons:commons-lang3:3.4"
             ]
     ]
 }

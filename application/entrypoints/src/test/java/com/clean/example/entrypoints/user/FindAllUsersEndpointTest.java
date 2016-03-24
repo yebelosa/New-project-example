@@ -1,7 +1,7 @@
 package com.clean.example.entrypoints.user;
 
 import com.clean.example.core.domain.User;
-import com.clean.example.core.usecase.user.GetAllUsersUseCase;
+import com.clean.example.core.usecase.user.FindAllUsersUseCase;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -11,11 +11,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class GetAllUsersEndpointTest {
+public class FindAllUsersEndpointTest {
 
-    GetAllUsersUseCase getAllUsersUseCase = mock(GetAllUsersUseCase.class);
+    FindAllUsersUseCase findAllUsersUseCase = mock(FindAllUsersUseCase.class);
 
-    GetAllUsersEndpoint getAllUsersEndpoint = new GetAllUsersEndpoint(getAllUsersUseCase);
+    FindAllUsersEndpoint findAllUsersEndpoint = new FindAllUsersEndpoint(findAllUsersUseCase);
 
     @Test
     public void retrievesAllUsers() throws Exception {
@@ -24,7 +24,7 @@ public class GetAllUsersEndpointTest {
                 user("username2", "FirstName2", "LastName2")
         );
 
-        List<UserDto> allUsers = getAllUsersEndpoint.getAllUsers();
+        List<UserDto> allUsers = findAllUsersEndpoint.getAllUsers();
 
         assertThat(allUsers).hasSize(2);
         thenUserHasBeenReturned(allUsers, "FirstName1", "LastName1");
@@ -33,7 +33,7 @@ public class GetAllUsersEndpointTest {
 
     private void givenThereAreUsers(User... users) {
         List<User> allUsers = Arrays.asList(users);
-        when(getAllUsersUseCase.getAllUsers()).thenReturn(allUsers);
+        when(findAllUsersUseCase.findAllUsers()).thenReturn(allUsers);
     }
 
     private User user(String username, String firstName, String lastName) {

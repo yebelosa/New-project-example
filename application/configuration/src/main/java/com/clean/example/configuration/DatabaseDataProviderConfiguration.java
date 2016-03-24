@@ -1,6 +1,6 @@
 package com.clean.example.configuration;
 
-import com.clean.example.core.usecase.user.GetAllUsers;
+import com.clean.example.core.usecase.user.FindAllUsers;
 import com.clean.example.dataproviders.database.user.GetAllExamplesFromDatabaseDataProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class DatabaseDataProviderConfiguration {
 
     @Bean
-    public GetAllUsers getAllExamples(JdbcTemplate jdbcTemplate) {
+    public FindAllUsers findAllUsers(JdbcTemplate jdbcTemplate) {
         return new GetAllExamplesFromDatabaseDataProvider(jdbcTemplate);
     }
 

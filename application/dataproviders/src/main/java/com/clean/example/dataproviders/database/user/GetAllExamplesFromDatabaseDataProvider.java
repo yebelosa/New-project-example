@@ -1,14 +1,14 @@
 package com.clean.example.dataproviders.database.user;
 
 import com.clean.example.core.domain.User;
-import com.clean.example.core.usecase.user.GetAllUsers;
+import com.clean.example.core.usecase.user.FindAllUsers;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class GetAllExamplesFromDatabaseDataProvider implements GetAllUsers {
+public class GetAllExamplesFromDatabaseDataProvider implements FindAllUsers {
 
     private JdbcTemplate jdbcTemplate;
 
@@ -17,7 +17,7 @@ public class GetAllExamplesFromDatabaseDataProvider implements GetAllUsers {
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<User> findAllUsers() {
         // TODO use jdbi instead
         List<Map<String, Object>> queryResults = jdbcTemplate.queryForList("SELECT username, first_name, last_name FROM clean_architecture.user");
 
