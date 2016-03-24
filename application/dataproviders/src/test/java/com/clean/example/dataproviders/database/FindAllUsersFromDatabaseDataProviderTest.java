@@ -1,7 +1,7 @@
 package com.clean.example.dataproviders.database;
 
 import com.clean.example.core.domain.User;
-import com.clean.example.dataproviders.database.user.GetAllExamplesFromDatabaseDataProvider;
+import com.clean.example.dataproviders.database.user.FindAllUsersFromDatabaseDataProvider;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -15,11 +15,11 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class GetAllExamplesFromDatabaseDataProviderTest {
+public class FindAllUsersFromDatabaseDataProviderTest {
 
     JdbcTemplate jdbcTemplate = mock(JdbcTemplate.class);
 
-    GetAllExamplesFromDatabaseDataProvider getAllExamplesFromDatabaseDataProvider = new GetAllExamplesFromDatabaseDataProvider(jdbcTemplate);
+    FindAllUsersFromDatabaseDataProvider findAllUsersFromDatabaseDataProvider = new FindAllUsersFromDatabaseDataProvider(jdbcTemplate);
 
     @Test
     public void findsAllUsersInDatabase() throws Exception {
@@ -28,7 +28,7 @@ public class GetAllExamplesFromDatabaseDataProviderTest {
                 userRow("username2", "FirstName2", "LastName2")
         );
 
-        List<User> allUsers = getAllExamplesFromDatabaseDataProvider.findAllUsers();
+        List<User> allUsers = findAllUsersFromDatabaseDataProvider.findAllUsers();
 
         assertThat(allUsers).hasSize(2);
         thenUserHasBeenReturned(allUsers, "username1", "FirstName1", "LastName1");

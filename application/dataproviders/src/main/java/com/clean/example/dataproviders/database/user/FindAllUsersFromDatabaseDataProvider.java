@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class GetAllExamplesFromDatabaseDataProvider implements FindAllUsers {
+public class FindAllUsersFromDatabaseDataProvider implements FindAllUsers {
 
     private JdbcTemplate jdbcTemplate;
 
-    public GetAllExamplesFromDatabaseDataProvider(JdbcTemplate jdbcTemplate) {
+    public FindAllUsersFromDatabaseDataProvider(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
