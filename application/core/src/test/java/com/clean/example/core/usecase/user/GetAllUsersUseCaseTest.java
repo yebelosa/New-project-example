@@ -1,4 +1,4 @@
-package com.clean.example.core.usecase;
+package com.clean.example.core.usecase.user;
 
 import com.clean.example.core.domain.User;
 import org.junit.Test;

@@ -1,7 +1,7 @@
-package com.clean.example.dataproviders.database;
+package com.clean.example.dataproviders.database.user;
 
 import com.clean.example.core.domain.User;
-import com.clean.example.core.usecase.GetAllUsers;
+import com.clean.example.core.usecase.user.GetAllUsers;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.ArrayList;

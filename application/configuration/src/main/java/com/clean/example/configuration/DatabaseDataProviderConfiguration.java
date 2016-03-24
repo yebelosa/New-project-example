@@ -1,7 +1,7 @@
 package com.clean.example.configuration;
 
-import com.clean.example.core.usecase.GetAllUsers;
-import com.clean.example.dataproviders.database.GetAllExamplesFromDatabaseDataProvider;
+import com.clean.example.core.usecase.user.GetAllUsers;
+import com.clean.example.dataproviders.database.user.GetAllExamplesFromDatabaseDataProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;

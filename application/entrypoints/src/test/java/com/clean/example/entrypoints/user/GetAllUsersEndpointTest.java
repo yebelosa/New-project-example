@@ -1,7 +1,7 @@
-package com.clean.example.entrypoints;
+package com.clean.example.entrypoints.user;
 
 import com.clean.example.core.domain.User;
-import com.clean.example.core.usecase.GetAllUsersUseCase;
+import com.clean.example.core.usecase.user.GetAllUsersUseCase;
 import org.junit.Test;
 
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.clean.example.entrypoints;
+package com.clean.example.entrypoints.user;
 
 class UserDto {
     private final String firstName;

@@ -1,6 +1,7 @@
 package com.clean.example.dataproviders.database;
 
 import com.clean.example.core.domain.User;
+import com.clean.example.dataproviders.database.user.GetAllExamplesFromDatabaseDataProvider;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 
