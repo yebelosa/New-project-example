@@ -25,6 +25,7 @@ dependencies {
 
     compile libs.spring_boot
     compile libs.database_initialisation
+    compile libs.log
 
     testCompile libs.unit_tests
 }
