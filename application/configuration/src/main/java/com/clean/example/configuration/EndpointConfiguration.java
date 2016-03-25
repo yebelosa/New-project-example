@@ -1,7 +1,7 @@
 package com.clean.example.configuration;
 
 import com.clean.example.core.usecase.user.FindAllUsersUseCase;
-import com.clean.example.entrypoints.user.FindAllUsersEndpoint;
+import com.clean.example.entrypoints.rest.user.FindAllUsersEndpoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

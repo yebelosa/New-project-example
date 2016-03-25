@@ -4,7 +4,7 @@ import com.clean.example.acceptance.YatspecTest;
 import com.clean.example.core.domain.User;
 import com.clean.example.core.usecase.user.FindAllUsersUseCase;
 import com.clean.example.core.usecase.user.NoUsersFoundException;
-import com.clean.example.entrypoints.user.FindAllUsersEndpoint;
+import com.clean.example.entrypoints.rest.user.FindAllUsersEndpoint;
 import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;

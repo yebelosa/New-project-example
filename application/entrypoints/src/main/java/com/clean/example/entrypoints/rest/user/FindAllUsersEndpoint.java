@@ -1,9 +1,9 @@
-package com.clean.example.entrypoints.user;
+package com.clean.example.entrypoints.rest.user;
 
 import com.clean.example.core.domain.User;
 import com.clean.example.core.usecase.user.FindAllUsersUseCase;
 import com.clean.example.core.usecase.user.NoUsersFoundException;
-import com.clean.example.entrypoints.exception.NotFoundException;
+import com.clean.example.entrypoints.rest.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;

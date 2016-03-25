@@ -1,7 +1,6 @@
 package com.clean.example.e2e;
 
-import com.clean.example.Application;
-import com.clean.example.entrypoints.user.FindAllUsersEndpoint;
+import com.clean.example.entrypoints.rest.user.FindAllUsersEndpoint;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -17,7 +16,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = {Application.class})
+@SpringApplicationConfiguration(classes = {ApplicationConfigurationForEndToEndTests.class})
 @IntegrationTest
 @WebAppConfiguration
 public class FindAllUsersEndToEndTest {
