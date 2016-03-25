@@ -1,6 +1,7 @@
 package com.clean.example.configuration;
 
 import com.clean.example.core.usecase.user.FindAllUsersUseCase;
+import com.clean.example.entrypoints.job.JobResults;
 import com.clean.example.entrypoints.job.ScheduledJob;
 import com.clean.example.entrypoints.job.user.FindAllUsersJob;
 import org.slf4j.Logger;
@@ -33,8 +34,13 @@ public class JobConfiguration {
     }
 
     @Bean
-    public ScheduledJob findAllUsersJob(FindAllUsersUseCase findAllUsersUseCase) {
-        return new FindAllUsersJob(findAllUsersUseCase);
+    public JobResults jobResults() {
+        return new JobResults();
+    }
+
+    @Bean
+    public ScheduledJob findAllUsersJob(FindAllUsersUseCase findAllUsersUseCase, JobResults jobResults) {
+        return new FindAllUsersJob(findAllUsersUseCase, jobResults);
     }
 
 }
