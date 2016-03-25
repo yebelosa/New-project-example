@@ -40,7 +40,8 @@ subprojects {
 
             spring_boot            : [
                     "org.springframework.boot:spring-boot-starter-web:${springboot_version}",
-                    "org.springframework.boot:spring-boot-starter-actuator:${springboot_version}"
+                    "org.springframework.boot:spring-boot-starter-actuator:${springboot_version}",
+                    "org.springframework.boot:spring-boot-starter-logging:${springboot_version}",
             ],
 
             rest                   : [
