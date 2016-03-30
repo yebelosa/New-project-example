@@ -1,6 +1,6 @@
-package com.clean.example.e2e;
+package com.clean.example.endtoend.user;
 
-import com.clean.example.endtoend.ApplicationConfigurationForEndToEndTests;
+import com.clean.example.endtoend.EndToEndYatspecTest;
 import com.clean.example.entrypoints.rest.user.FindAllUsersEndpoint;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -8,19 +8,10 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = {ApplicationConfigurationForEndToEndTests.class})
-@IntegrationTest
-@WebAppConfiguration
-public class FindAllUsersEndToEndTest {
+public class FindAllUsersEndToEndTest extends EndToEndYatspecTest {
 
     int responseStatus;
     JsonNode responseContent;
