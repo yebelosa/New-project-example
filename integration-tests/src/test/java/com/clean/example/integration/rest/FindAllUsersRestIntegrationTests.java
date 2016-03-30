@@ -1,6 +1,6 @@
 package com.clean.example.integration.rest;
 
-import com.clean.example.acceptance.YatspecTest;
+import com.clean.example.businessrequirements.YatspecTest;
 import com.clean.example.core.domain.User;
 import com.clean.example.core.usecase.user.FindAllUsersUseCase;
 import com.clean.example.core.usecase.user.NoUsersFoundException;

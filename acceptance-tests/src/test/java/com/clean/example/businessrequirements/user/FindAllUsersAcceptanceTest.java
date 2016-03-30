@@ -1,6 +1,6 @@
-package com.clean.example.acceptance.user;
+package com.clean.example.businessrequirements.user;
 
-import com.clean.example.acceptance.YatspecTest;
+import com.clean.example.businessrequirements.YatspecTest;
 import com.clean.example.core.domain.User;
 import com.clean.example.core.usecase.user.FindAllUsers;
 import com.clean.example.core.usecase.user.FindAllUsersUseCase;

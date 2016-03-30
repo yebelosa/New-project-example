@@ -1,5 +1,6 @@
 package com.clean.example.e2e;
 
+import com.clean.example.endtoend.ApplicationConfigurationForEndToEndTests;
 import com.clean.example.entrypoints.rest.user.FindAllUsersEndpoint;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;

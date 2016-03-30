@@ -1,4 +1,4 @@
-package com.clean.example.acceptance;
+package com.clean.example.businessrequirements;
 
 import com.googlecode.yatspec.junit.SpecResultListener;
 import com.googlecode.yatspec.junit.SpecRunner;
