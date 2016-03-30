@@ -1,10 +1,10 @@
 package com.clean.example.businessrequirements.user;
 
-import com.clean.example.businessrequirements.YatspecTest;
 import com.clean.example.core.domain.User;
 import com.clean.example.core.usecase.user.FindAllUsers;
 import com.clean.example.core.usecase.user.FindAllUsersUseCase;
 import com.clean.example.core.usecase.user.NoUsersFoundException;
+import com.clean.example.yatspec.YatspecTest;
 import com.googlecode.yatspec.junit.Notes;
 import org.junit.Test;
 

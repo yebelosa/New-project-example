@@ -1,7 +1,7 @@
 package com.clean.example.businessrequirements.broadbandAccessDevice;
 
-import com.clean.example.businessrequirements.YatspecTest;
 import com.clean.example.endtoend.broadbandAccessDevice.ReconcileBroadbandAccessDeviceEndToEndTest;
+import com.clean.example.yatspec.YatspecTest;
 import com.googlecode.yatspec.junit.LinkingNote;
 import com.googlecode.yatspec.junit.Notes;
 import org.junit.Ignore;

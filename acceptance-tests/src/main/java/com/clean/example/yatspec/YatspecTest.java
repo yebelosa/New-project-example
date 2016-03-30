@@ -1,4 +1,4 @@
-package com.clean.example.businessrequirements;
+package com.clean.example.yatspec;
 
 import com.googlecode.yatspec.junit.SpecResultListener;
 import com.googlecode.yatspec.junit.SpecRunner;
