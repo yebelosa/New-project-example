@@ -1,4 +1,4 @@
-package com.clean.example.integration.database;
+package com.clean.example.integration.database.user;
 
 import com.clean.example.configuration.DatabaseDataProviderConfiguration;
 import com.clean.example.configuration.DatasourceConfiguration;
