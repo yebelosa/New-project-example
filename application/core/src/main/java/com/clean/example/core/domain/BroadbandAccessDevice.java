@@ -1,5 +1,7 @@
 package com.clean.example.core.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class BroadbandAccessDevice {
 
     private final String hostname;
@@ -18,4 +20,8 @@ public class BroadbandAccessDevice {
         return serialNumber;
     }
 
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }
