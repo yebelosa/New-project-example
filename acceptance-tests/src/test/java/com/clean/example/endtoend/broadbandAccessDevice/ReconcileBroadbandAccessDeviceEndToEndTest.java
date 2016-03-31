@@ -78,12 +78,12 @@ public class ReconcileBroadbandAccessDeviceEndToEndTest extends EndToEndYatspecT
     }
 
     private void thenTheModelHasBeenUpdatedFor(String hostname, String expectedSerialNumber) {
-        BroadbandAccessDevice device = broadbandAccessDeviceDatabaseDataProvider.getDeviceDetails(hostname);
+        BroadbandAccessDevice device = broadbandAccessDeviceDatabaseDataProvider.getByHostname(hostname);
         assertThat(device.getSerialNumber()).isEqualTo(expectedSerialNumber);
     }
 
     private void thenTheModelHasNotBeenUpdatedFor(String hostname, String expectedSerialNumber) {
-        BroadbandAccessDevice device = broadbandAccessDeviceDatabaseDataProvider.getDeviceDetails(hostname);
+        BroadbandAccessDevice device = broadbandAccessDeviceDatabaseDataProvider.getByHostname(hostname);
         assertThat(device.getSerialNumber()).isEqualTo(expectedSerialNumber);
     }
 

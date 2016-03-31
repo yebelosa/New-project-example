@@ -1,10 +1,6 @@
 package com.clean.example.businessrequirements.broadbandAccessDevice;
 
-import com.clean.example.core.domain.BroadbandAccessDevice;
-import com.clean.example.core.usecase.broadbandaccessdevice.GetDeviceDetailsFromModel;
-import com.clean.example.core.usecase.broadbandaccessdevice.GetSerialNumberFromReality;
-import com.clean.example.core.usecase.broadbandaccessdevice.ReconcileBroadbandAccessDevicesUseCase;
-import com.clean.example.core.usecase.broadbandaccessdevice.UpdateSerialNumberInModel;
+import com.clean.example.core.usecase.broadbandaccessdevice.*;
 import com.clean.example.core.usecase.job.OnFailure;
 import com.clean.example.core.usecase.job.OnSuccess;
 import com.clean.example.dataproviders.network.deviceclient.DeviceConnectionTimeoutException;
@@ -14,6 +10,8 @@ import com.googlecode.yatspec.junit.LinkingNote;
 import com.googlecode.yatspec.junit.Notes;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import java.util.Arrays;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
@@ -30,22 +28,26 @@ public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
     //   - doesn't test technical details (e.g. the web layer, or the fact that it's a scheduled job)
     //   - doesn't test low level details (e.g. weird exception scenarios, null values, etc.). they are left to the unit tests
 
-    private static final String HOSTNAME = "device.hostname.com";
-    private static final String SERIAL_NUMBER = "originalSerialNumber";
-    private static final String NEW_SERIAL_NUMBER = "newSerialNumber";
+    private static final String HOSTNAME_1 = "device1.hostname.com";
+    private static final String HOSTNAME_2 = "device2.hostname.com";
+    private static final String SERIAL_NUMBER_1 = "originalSerialNumber1";
+    private static final String SERIAL_NUMBER_2 = "originalSerialNumber2";
+    private static final String NEW_SERIAL_NUMBER_1 = "newSerialNumber1";
+    private static final String NEW_SERIAL_NUMBER_2 = "newSerialNumber2";
     public static final String INVALID_SERIAL_NUMBER = "invalidSerialNumberBecauseItIsTooLong";
 
-    GetDeviceDetailsFromModel getDeviceDetailsFromModel = mock(GetDeviceDetailsFromModel.class);
+    GetAllDeviceHostnames getAllDeviceHostnames = mock(GetAllDeviceHostnames.class);
+    GetSerialNumberFromModel getSerialNumberFromModel = mock(GetSerialNumberFromModel.class);
     GetSerialNumberFromReality getSerialNumberFromReality = mock(GetSerialNumberFromReality.class);
     UpdateSerialNumberInModel updateSerialNumberInModel = mock(UpdateSerialNumberInModel.class);
     OnSuccess onSuccess = mock(OnSuccess.class);
     OnFailure onFailure = mock(OnFailure.class);
-    ReconcileBroadbandAccessDevicesUseCase reconcileBroadbandAccessDevicesUseCase = new ReconcileBroadbandAccessDevicesUseCase(getDeviceDetailsFromModel, getSerialNumberFromReality, updateSerialNumberInModel);
+    ReconcileBroadbandAccessDevicesUseCase reconcileBroadbandAccessDevicesUseCase = new ReconcileBroadbandAccessDevicesUseCase(getAllDeviceHostnames, getSerialNumberFromModel, getSerialNumberFromReality, updateSerialNumberInModel);
 
     @Test
     public void nothingToUpdateWhenModelAndRealityAreTheSame() throws Exception {
-        givenADeviceInTheModel();
-        givenADeviceInRealityWithTheSameSerialNumber();
+        givenSomeDevicesInTheModel();
+        givenSomeDevicesInRealityWithTheSameSerialNumber();
 
         whenTheDeviceIsReconciled();
 
@@ -55,7 +57,7 @@ public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
 
     @Test
     public void updatesModelWhenRealityHasChanged() throws Exception {
-        givenADeviceInTheModel();
+        givenSomeDevicesInTheModel();
         givenADeviceInRealityWithANewSerialNumber();
 
         whenTheDeviceIsReconciled();
@@ -66,7 +68,7 @@ public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
 
     @Test
     public void recordsAnErrorWhenRealityInformationIsInvalid() throws Exception {
-        givenADeviceInTheModel();
+        givenSomeDevicesInTheModel();
         givenADeviceInRealityWithAnInvalidSerialNumber();
 
         whenTheDeviceIsReconciled();
@@ -77,7 +79,7 @@ public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
 
     @Test
     public void recordsAnErrorWhenTheCommunicationWithTheDeviceHasProblems() throws Exception {
-        givenADeviceInTheModel();
+        givenSomeDevicesInTheModel();
         givenADeviceInRealityThatIsNotResponding();
 
         whenTheDeviceIsReconciled();
@@ -87,30 +89,51 @@ public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
     }
 
     // GIVENs
-    private void givenADeviceInTheModel() {
-        BroadbandAccessDevice deviceInModel = new BroadbandAccessDevice(HOSTNAME, SERIAL_NUMBER);
-        when(getDeviceDetailsFromModel.getDeviceDetails(HOSTNAME)).thenReturn(deviceInModel);
-        log("Device in model before reconciliation", "Hostname: [" + deviceInModel.getHostname() + "], Serial Number: [" + deviceInModel.getSerialNumber() + "]");
+    private void givenSomeDevicesInTheModel() {
+        when(getAllDeviceHostnames.getAllDeviceHostnames()).thenReturn(Arrays.asList(HOSTNAME_1, HOSTNAME_2));
+
+        when(getSerialNumberFromModel.getSerialNumber(HOSTNAME_1)).thenReturn(SERIAL_NUMBER_1);
+        when(getSerialNumberFromModel.getSerialNumber(HOSTNAME_2)).thenReturn(SERIAL_NUMBER_2);
+
+        log("Devices in model before reconciliation",
+                "Hostname: [" + HOSTNAME_1 + "], Serial Number: [" + SERIAL_NUMBER_1 + "]\n" +
+                "Hostname: [" + HOSTNAME_2 + "], Serial Number: [" + SERIAL_NUMBER_2 + "]");
     }
 
-    private void givenADeviceInRealityWithTheSameSerialNumber() {
-        when(getSerialNumberFromReality.getSerialNumber(HOSTNAME)).thenReturn(SERIAL_NUMBER);
-        log("Device in reality", "Hostname: [" + HOSTNAME + "], Serial Number: [" + SERIAL_NUMBER + "]");
+    private void givenSomeDevicesInRealityWithTheSameSerialNumber() {
+        when(getSerialNumberFromReality.getSerialNumber(HOSTNAME_1)).thenReturn(SERIAL_NUMBER_1);
+        when(getSerialNumberFromReality.getSerialNumber(HOSTNAME_2)).thenReturn(SERIAL_NUMBER_2);
+
+        log("Devices in reality",
+                "Hostname: [" + HOSTNAME_1 + "], Serial Number: [" + SERIAL_NUMBER_1 + "]\n" +
+                "Hostname: [" + HOSTNAME_2 + "], Serial Number: [" + SERIAL_NUMBER_2 + "]");
     }
 
     private void givenADeviceInRealityWithANewSerialNumber() {
-        when(getSerialNumberFromReality.getSerialNumber(HOSTNAME)).thenReturn(NEW_SERIAL_NUMBER);
-        log("Device in reality", "Hostname: [" + HOSTNAME + "], Serial Number: [" + NEW_SERIAL_NUMBER + "]");
+        when(getSerialNumberFromReality.getSerialNumber(HOSTNAME_1)).thenReturn(NEW_SERIAL_NUMBER_1);
+        when(getSerialNumberFromReality.getSerialNumber(HOSTNAME_2)).thenReturn(SERIAL_NUMBER_2);
+
+        log("Devices in reality",
+                "Hostname: [" + HOSTNAME_1 + "], Serial Number: [" + NEW_SERIAL_NUMBER_1 + "]\n" +
+                "Hostname: [" + HOSTNAME_2 + "], Serial Number: [" + SERIAL_NUMBER_2 + "]");
     }
 
     private void givenADeviceInRealityWithAnInvalidSerialNumber() {
-        when(getSerialNumberFromReality.getSerialNumber(HOSTNAME)).thenReturn(INVALID_SERIAL_NUMBER);
-        log("Device in reality", "Hostname: [" + HOSTNAME + "], Serial Number: [" + INVALID_SERIAL_NUMBER + "]");
+        when(getSerialNumberFromReality.getSerialNumber(HOSTNAME_1)).thenReturn(INVALID_SERIAL_NUMBER);
+        when(getSerialNumberFromReality.getSerialNumber(HOSTNAME_2)).thenReturn(SERIAL_NUMBER_2);
+
+        log("Devices in reality",
+                "Hostname: [" + HOSTNAME_1 + "], Serial Number: [" + INVALID_SERIAL_NUMBER + "]\n" +
+                "Hostname: [" + HOSTNAME_2 + "], Serial Number: [" + SERIAL_NUMBER_2 + "]");
     }
 
     private void givenADeviceInRealityThatIsNotResponding() {
-        when(getSerialNumberFromReality.getSerialNumber(HOSTNAME)).thenThrow(new DeviceConnectionTimeoutException());
-        log("Device in reality", "Device is not responding");
+        when(getSerialNumberFromReality.getSerialNumber(HOSTNAME_1)).thenThrow(new DeviceConnectionTimeoutException());
+        when(getSerialNumberFromReality.getSerialNumber(HOSTNAME_2)).thenReturn(SERIAL_NUMBER_2);
+
+        log("Devices in reality",
+                "Hostname: [" + HOSTNAME_1 + "] -> Device not responding\n" +
+                "Hostname: [" + HOSTNAME_2 + "], Serial Number: [" + SERIAL_NUMBER_2 + "]");
     }
 
     // WHENs
@@ -120,13 +143,16 @@ public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
 
     // THENs
     private void thenTheDeviceInTheModelIsNotUpdated() {
-        verify(updateSerialNumberInModel, never()).updateSerialNumber(eq(HOSTNAME), anyString());
-        log("Device in model after reconciliation", "Hostname: [" + HOSTNAME + "], Serial Number: [" + SERIAL_NUMBER + "]");
+        verify(updateSerialNumberInModel, never()).updateSerialNumber(eq(HOSTNAME_1), anyString());
+        log("Device in model after reconciliation", "Hostname: [" + HOSTNAME_1 + "], Serial Number: [" + SERIAL_NUMBER_1 + "]");
     }
 
     private void thenTheDeviceInTheModelIsUpdatedWithTheNewSerialNumber() {
-        verify(updateSerialNumberInModel).updateSerialNumber(HOSTNAME, NEW_SERIAL_NUMBER);
-        log("Device in model after reconciliation", "Hostname: [" + HOSTNAME + "], Serial Number: [" + NEW_SERIAL_NUMBER + "]");
+        verify(updateSerialNumberInModel).updateSerialNumber(HOSTNAME_1, NEW_SERIAL_NUMBER_1);
+
+        log("Devices in model after reconciliation",
+                "Hostname: [" + HOSTNAME_1 + "], Serial Number: [" + NEW_SERIAL_NUMBER_1 + "]\n" +
+                "Hostname: [" + HOSTNAME_2 + "], Serial Number: [" + SERIAL_NUMBER_2 + "]");
     }
 
     private void thenNoSuccessOrFailureIsRecorded() {

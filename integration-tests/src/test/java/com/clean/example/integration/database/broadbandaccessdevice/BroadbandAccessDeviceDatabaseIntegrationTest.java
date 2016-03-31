@@ -1,10 +1,11 @@
 package com.clean.example.integration.database.broadbandaccessdevice;
 
-import com.clean.example.core.domain.BroadbandAccessDevice;
 import com.clean.example.dataproviders.database.broadbandaccessdevice.BroadbandAccessDeviceDatabaseDataProvider;
 import com.clean.example.integration.database.DatabaseIntegrationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,15 +15,22 @@ public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegr
     BroadbandAccessDeviceDatabaseDataProvider broadbandAccessDeviceDatabaseDataProvider;
 
     @Test
-    public void getsDeviceDetails() throws Exception {
+    public void getsAllDeviceHostnames() throws Exception {
+        givenABroadbandAccessDevice("hostname1");
+        givenABroadbandAccessDevice("hostname2");
+
+        List<String> allDeviceHostnames = broadbandAccessDeviceDatabaseDataProvider.getAllDeviceHostnames();
+
+        assertThat(allDeviceHostnames).containsOnly("hostname1", "hostname2");
+    }
+
+    @Test
+    public void getsTheSerialNumberOfADevice() throws Exception {
         givenABroadbandAccessDevice("hostname1", "serialNumber1");
-        givenABroadbandAccessDevice("hostname2", "serialNumber2");
 
-        BroadbandAccessDevice device1 = broadbandAccessDeviceDatabaseDataProvider.getDeviceDetails("hostname1");
-        assertThat(device1.getSerialNumber()).isEqualTo("serialNumber1");
+        String serialNumber = broadbandAccessDeviceDatabaseDataProvider.getSerialNumber("hostname1");
 
-        BroadbandAccessDevice device2 = broadbandAccessDeviceDatabaseDataProvider.getDeviceDetails("hostname2");
-        assertThat(device2.getSerialNumber()).isEqualTo("serialNumber2");
+        assertThat(serialNumber).isEqualTo("serialNumber1");
     }
 
     @Test
@@ -31,8 +39,12 @@ public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegr
 
         broadbandAccessDeviceDatabaseDataProvider.updateSerialNumber("hostname1", "newSerialNumber");
 
-        BroadbandAccessDevice device = broadbandAccessDeviceDatabaseDataProvider.getDeviceDetails("hostname1");
-        assertThat(device.getSerialNumber()).isEqualTo("newSerialNumber");
+        String serialNumber = broadbandAccessDeviceDatabaseDataProvider.getSerialNumber("hostname1");
+        assertThat(serialNumber).isEqualTo("newSerialNumber");
+    }
+
+    private void givenABroadbandAccessDevice(String hostname) {
+        givenABroadbandAccessDevice(hostname, "aSerialNumber");
     }
 
     private void givenABroadbandAccessDevice(String hostname, String serialNumber) {

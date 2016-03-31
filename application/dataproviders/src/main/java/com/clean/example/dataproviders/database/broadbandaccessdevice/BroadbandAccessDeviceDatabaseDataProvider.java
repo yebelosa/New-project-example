@@ -1,14 +1,16 @@
 package com.clean.example.dataproviders.database.broadbandaccessdevice;
 
 import com.clean.example.core.domain.BroadbandAccessDevice;
-import com.clean.example.core.usecase.broadbandaccessdevice.GetDeviceDetailsFromModel;
+import com.clean.example.core.usecase.broadbandaccessdevice.GetAllDeviceHostnames;
+import com.clean.example.core.usecase.broadbandaccessdevice.GetSerialNumberFromModel;
 import com.clean.example.core.usecase.broadbandaccessdevice.UpdateSerialNumberInModel;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.List;
 import java.util.Map;
 
-public class BroadbandAccessDeviceDatabaseDataProvider implements GetDeviceDetailsFromModel, UpdateSerialNumberInModel {
+public class BroadbandAccessDeviceDatabaseDataProvider implements GetAllDeviceHostnames, GetSerialNumberFromModel, UpdateSerialNumberInModel {
 
     private JdbcTemplate jdbcTemplate;
 
@@ -17,12 +19,14 @@ public class BroadbandAccessDeviceDatabaseDataProvider implements GetDeviceDetai
     }
 
     @Override
-    public BroadbandAccessDevice getDeviceDetails(String hostname) {
+    public List<String> getAllDeviceHostnames() {
+        return jdbcTemplate.queryForList("SELECT hostname FROM clean_architecture.bb_access_device", String.class);
+    }
+
+    @Override
+    public String getSerialNumber(String hostname) {
         try {
-            Map<String, Object> result = jdbcTemplate.queryForMap("SELECT hostname, serial_number FROM clean_architecture.bb_access_device WHERE hostname = ?", hostname);
-            String resultHostname = (String) result.get("hostname");
-            String resultSerialNumber = (String) result.get("serial_number");
-            return new BroadbandAccessDevice(resultHostname, resultSerialNumber);
+            return jdbcTemplate.queryForObject("SELECT serial_number FROM clean_architecture.bb_access_device WHERE hostname = ?", String.class, hostname);
         } catch (IncorrectResultSizeDataAccessException e) {
             return null;
         }
@@ -38,4 +42,10 @@ public class BroadbandAccessDeviceDatabaseDataProvider implements GetDeviceDetai
                 " VALUES (bb_access_device_id_seq.nextval, ?, ?, sysdate)", hostname, serialNumber);
     }
 
+    public BroadbandAccessDevice getByHostname(String hostname) {
+        Map<String, Object> result = jdbcTemplate.queryForMap("SELECT hostname, serial_number FROM clean_architecture.bb_access_device WHERE hostname = ?", hostname);
+        String resultHostname = (String) result.get("hostname");
+        String resultSerialNumber = (String) result.get("serial_number");
+        return new BroadbandAccessDevice(resultHostname, resultSerialNumber);
+    }
 }
