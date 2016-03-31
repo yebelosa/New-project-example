@@ -7,9 +7,12 @@ public class JobResults {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JobResults.class);
 
-    public void recordJobResults(ScheduledJob job, int numberOfSuccesses, int numberOfFailures) {
-        LOGGER.info("{} finished, recording results: {} successes, {} failures", job.getName(), numberOfSuccesses, numberOfFailures);
-        // do nothing for now; eventually this could save results into a database, or send them to another app, or anything really
+    public JobResultsCount createJobResultsCount() {
+        return new JobResultsCount();
     }
 
+    public void recordJobResults(ScheduledJob job, JobResultsCount jobResultsCount) {
+        LOGGER.info("{} finished, recording results: {} successes, {} failures", job.getName(), jobResultsCount.getNumberOfSuccesses(), jobResultsCount.getNumberOfFailures());
+        // do nothing for now; eventually this could save results into a database, or send them to another app, or anything really
+    }
 }

@@ -5,11 +5,11 @@ import com.clean.example.core.usecase.job.OnSuccess;
 
 public class ReconcileBroadbandAccessDevicesUseCase {
 
-    public ReconcileBroadbandAccessDevicesUseCase(GetDeviceDetailsFromModel getDeviceDetailsFromModel, GetSerialNumberFromReality getSerialNumberFromReality, UpdateSerialNumberInModel updateSerialNumberInModel, OnSuccess onSuccess, OnFailure onFailure) {
+    public ReconcileBroadbandAccessDevicesUseCase(GetDeviceDetailsFromModel getDeviceDetailsFromModel, GetSerialNumberFromReality getSerialNumberFromReality, UpdateSerialNumberInModel updateSerialNumberInModel) {
 
     }
 
-    public void reconcile() {
+    public void reconcile(OnSuccess onSuccess, OnFailure onFailure) {
 
         //getAllModelDevices
         //loop

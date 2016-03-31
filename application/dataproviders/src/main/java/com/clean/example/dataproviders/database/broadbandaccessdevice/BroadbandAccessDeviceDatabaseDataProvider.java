@@ -1,11 +1,13 @@
 package com.clean.example.dataproviders.database.broadbandaccessdevice;
 
 import com.clean.example.core.domain.BroadbandAccessDevice;
+import com.clean.example.core.usecase.broadbandaccessdevice.GetDeviceDetailsFromModel;
+import com.clean.example.core.usecase.broadbandaccessdevice.UpdateSerialNumberInModel;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.Map;
 
-public class BroadbandAccessDeviceDatabaseDataProvider {
+public class BroadbandAccessDeviceDatabaseDataProvider implements GetDeviceDetailsFromModel, UpdateSerialNumberInModel {
 
     private JdbcTemplate jdbcTemplate;
 
@@ -23,5 +25,15 @@ public class BroadbandAccessDeviceDatabaseDataProvider {
         String resultHostname = (String) result.get("hostname");
         String resultSerialNumber = (String) result.get("serial_number");
         return new BroadbandAccessDevice(resultHostname, resultSerialNumber);
+    }
+
+    @Override
+    public BroadbandAccessDevice getDeviceDetails(String hostname) {
+        throw new RuntimeException("TODO");
+    }
+
+    @Override
+    public void updateSerialNumber(String hostname, String serialNumber) {
+        throw new RuntimeException("TODO");
     }
 }

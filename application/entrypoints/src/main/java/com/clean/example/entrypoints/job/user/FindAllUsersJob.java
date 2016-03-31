@@ -47,7 +47,7 @@ public class FindAllUsersJob implements ScheduledJob {
         LOGGER.info("Finding all users from scheduled jobs...");
         List<User> allUsers = findAllUsersUseCase.findAllUsers();
         LOGGER.info("Found users: {}", allUsers);
-        jobResults.recordJobResults(this, allUsers.size(), 0);
+        jobResults.recordJobResults(this, jobResults.createJobResultsCount());
     }
 
 }

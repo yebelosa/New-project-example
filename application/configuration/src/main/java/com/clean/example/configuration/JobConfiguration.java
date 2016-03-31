@@ -1,5 +1,6 @@
 package com.clean.example.configuration;
 
+import com.clean.example.core.usecase.broadbandaccessdevice.ReconcileBroadbandAccessDevicesUseCase;
 import com.clean.example.core.usecase.user.FindAllUsersUseCase;
 import com.clean.example.entrypoints.job.JobResults;
 import com.clean.example.entrypoints.job.ScheduledJob;
@@ -22,8 +23,8 @@ public class JobConfiguration {
     }
 
     @Bean
-    public ScheduledJob reconcileBroadbandAccessDeviceJob(JobResults jobResults) {
-        return new ReconcileBroadbandAccessDeviceJob(jobResults);
+    public ScheduledJob reconcileBroadbandAccessDeviceJob(ReconcileBroadbandAccessDevicesUseCase reconcileBroadbandAccessDevicesUseCase, JobResults jobResults) {
+        return new ReconcileBroadbandAccessDeviceJob(reconcileBroadbandAccessDevicesUseCase, jobResults);
     }
 
 }

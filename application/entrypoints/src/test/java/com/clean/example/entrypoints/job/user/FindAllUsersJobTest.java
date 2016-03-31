@@ -3,6 +3,7 @@ package com.clean.example.entrypoints.job.user;
 import com.clean.example.core.domain.User;
 import com.clean.example.core.usecase.user.FindAllUsersUseCase;
 import com.clean.example.entrypoints.job.JobResults;
+import com.clean.example.entrypoints.job.JobResultsCount;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -22,7 +23,7 @@ public class FindAllUsersJobTest {
 
         findAllUsersJob.run();
 
-        verify(jobResults).recordJobResults(findAllUsersJob, 2, 0);
+        verify(jobResults).recordJobResults(eq(findAllUsersJob), any(JobResultsCount.class));
     }
 
     private void givenThereAreTwoUsers() {

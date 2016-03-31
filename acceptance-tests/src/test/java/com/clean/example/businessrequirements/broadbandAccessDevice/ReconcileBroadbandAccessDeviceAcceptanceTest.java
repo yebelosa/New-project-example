@@ -40,7 +40,7 @@ public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
     UpdateSerialNumberInModel updateSerialNumberInModel = mock(UpdateSerialNumberInModel.class);
     OnSuccess onSuccess = mock(OnSuccess.class);
     OnFailure onFailure = mock(OnFailure.class);
-    ReconcileBroadbandAccessDevicesUseCase reconcileBroadbandAccessDevicesUseCase = new ReconcileBroadbandAccessDevicesUseCase(getDeviceDetailsFromModel, getSerialNumberFromReality, updateSerialNumberInModel, onSuccess, onFailure);
+    ReconcileBroadbandAccessDevicesUseCase reconcileBroadbandAccessDevicesUseCase = new ReconcileBroadbandAccessDevicesUseCase(getDeviceDetailsFromModel, getSerialNumberFromReality, updateSerialNumberInModel);
 
     @Test
     public void nothingToUpdateWhenModelAndRealityAreTheSame() throws Exception {
@@ -115,7 +115,7 @@ public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
 
     // WHENs
     private void whenTheDeviceIsReconciled() {
-        reconcileBroadbandAccessDevicesUseCase.reconcile();
+        reconcileBroadbandAccessDevicesUseCase.reconcile(onSuccess, onFailure);
     }
 
     // THENs

@@ -1,6 +1,10 @@
 package com.clean.example.entrypoints.job.broadbandaccessdevice;
 
+import com.clean.example.core.usecase.broadbandaccessdevice.ReconcileBroadbandAccessDevicesUseCase;
+import com.clean.example.core.usecase.job.OnFailure;
+import com.clean.example.core.usecase.job.OnSuccess;
 import com.clean.example.entrypoints.job.JobResults;
+import com.clean.example.entrypoints.job.JobResultsCount;
 import com.clean.example.entrypoints.job.ScheduledJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,9 +15,11 @@ public class ReconcileBroadbandAccessDeviceJob implements ScheduledJob {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReconcileBroadbandAccessDeviceJob.class);
 
+    private ReconcileBroadbandAccessDevicesUseCase reconcileBroadbandAccessDevicesUseCase;
     private final JobResults jobResults;
 
-    public ReconcileBroadbandAccessDeviceJob(JobResults jobResults) {
+    public ReconcileBroadbandAccessDeviceJob(ReconcileBroadbandAccessDevicesUseCase reconcileBroadbandAccessDevicesUseCase, JobResults jobResults) {
+        this.reconcileBroadbandAccessDevicesUseCase = reconcileBroadbandAccessDevicesUseCase;
         this.jobResults = jobResults;
     }
 
@@ -39,7 +45,13 @@ public class ReconcileBroadbandAccessDeviceJob implements ScheduledJob {
 
     @Override
     public void run() {
-        LOGGER.info("Running...TODO");
+        LOGGER.info("Job Starting: {}...", getName());
+        JobResultsCount jobResultsCount = jobResults.createJobResultsCount();
+        OnSuccess success = jobResultsCount::success;
+        OnFailure failure = jobResultsCount::failure;
+        reconcileBroadbandAccessDevicesUseCase.reconcile(success, failure);
+        jobResults.recordJobResults(this, jobResultsCount);
+        LOGGER.info("Job Completed: {}", getName());
     }
 
 }
