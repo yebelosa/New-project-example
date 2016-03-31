@@ -1,25 +1,18 @@
 package com.clean.example.integration.database.user;
 
-import com.clean.example.configuration.DatabaseDataProviderConfiguration;
-import com.clean.example.configuration.DatasourceConfiguration;
 import com.clean.example.core.domain.User;
 import com.clean.example.dataproviders.database.user.FindAllUsersFromDatabaseDataProvider;
+import com.clean.example.integration.database.DatabaseIntegrationTest;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ContextConfiguration(classes = {DatasourceConfiguration.class, DatabaseDataProviderConfiguration.class})
-@RunWith(SpringJUnit4ClassRunner.class)
-public class FindAllUsersDatabaseIntegrationTest extends AbstractTransactionalJUnit4SpringContextTests {
+public class FindAllUsersDatabaseIntegrationTest extends DatabaseIntegrationTest {
 
     @Autowired
     FindAllUsersFromDatabaseDataProvider findAllUsersFromDatabaseDataProvider;
