@@ -32,6 +32,18 @@ public abstract class YatspecTest implements WithTestState, WithCustomResultList
         testState.log(title, StringUtils.join(value, "<br/>"));
     }
 
+    protected <T> T with(T value) {
+        return value;
+    }
+
+    protected <T> T and(T value) {
+        return value;
+    }
+
+    protected <T> T to(T value) {
+        return value;
+    }
+
     @Override
     public Iterable<SpecResultListener> getResultListeners() throws Exception {
         List<SpecResultListener> specResultListeners = new ArrayList<>();

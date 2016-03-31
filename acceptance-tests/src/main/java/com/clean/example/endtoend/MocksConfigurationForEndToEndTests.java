@@ -1,6 +1,6 @@
 package com.clean.example.endtoend;
 
-import com.clean.example.dataproviders.network.broadbandaccessdevice.DeviceClient;
+import com.clean.example.dataproviders.network.deviceclient.DeviceClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

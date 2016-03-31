@@ -1,8 +1,8 @@
 package com.clean.example.configuration;
 
 import com.clean.example.dataproviders.network.broadbandaccessdevice.BroadbandAccessDeviceNetworkDataProvider;
-import com.clean.example.dataproviders.network.broadbandaccessdevice.DeviceClient;
-import com.clean.example.dataproviders.network.broadbandaccessdevice.FakeDeviceClient;
+import com.clean.example.dataproviders.network.deviceclient.DeviceClient;
+import com.clean.example.dataproviders.network.deviceclient.FakeDeviceClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

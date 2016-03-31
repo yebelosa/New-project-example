@@ -1,4 +1,4 @@
-package com.clean.example.dataproviders.network.broadbandaccessdevice;
+package com.clean.example.dataproviders.network.deviceclient;
 
 public interface DeviceClient {
 

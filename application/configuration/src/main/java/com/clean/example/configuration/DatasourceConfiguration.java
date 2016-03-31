@@ -1,11 +1,11 @@
 package com.clean.example.configuration;
 
+import org.h2.jdbcx.JdbcConnectionPool;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -19,12 +19,10 @@ public class DatasourceConfiguration {
         // For more info on h2 see http://www.h2database.com/html/features.html
         String h2InitialisationScript = new ClassPathResource("h2-schema.sql").getFile().getAbsolutePath();
 
-        SimpleDriverDataSource simpleDriverDataSource = new SimpleDriverDataSource();
-        simpleDriverDataSource.setDriverClass(org.h2.Driver.class);
-        simpleDriverDataSource.setUrl("jdbc:h2:mem:example;MODE=Oracle;INIT=runscript from '" + h2InitialisationScript + "'");
-        simpleDriverDataSource.setUsername("CLEAN_ARCHITECTURE");
-        simpleDriverDataSource.setPassword("");
-        return simpleDriverDataSource;
+        String jdbcUrl = "jdbc:h2:mem:example;MODE=Oracle;INIT=runscript from '" + h2InitialisationScript + "'";
+        String username = "CLEAN_ARCHITECTURE";
+        String password = "";
+        return JdbcConnectionPool.create(jdbcUrl, username, password);
     }
 
     @Bean
