@@ -3,21 +3,6 @@ CREATE SCHEMA IF NOT EXISTS CLEAN_ARCHITECTURE;
 SET SCHEMA CLEAN_ARCHITECTURE;
 
 /************************************************/
-/* USER  */
-/************************************************/
-
-CREATE TABLE CLEAN_ARCHITECTURE.USER (
-  ID            NUMBER        NOT NULL,
-  USERNAME      VARCHAR2(100) NOT NULL,
-  FIRST_NAME    VARCHAR2(100) NOT NULL,
-  LAST_NAME     VARCHAR2(100) NOT NULL,
-  CREATED_DATE  DATE
-);
-
-INSERT INTO CLEAN_ARCHITECTURE.USER(ID, USERNAME, FIRST_NAME, LAST_NAME, CREATED_DATE) VALUES (1, 'mattia.battiston', 'Mattia', 'Battiston', SYSDATE);
-INSERT INTO CLEAN_ARCHITECTURE.USER(ID, USERNAME, FIRST_NAME, LAST_NAME, CREATED_DATE) VALUES (2, 'mary.berry', 'Mary', 'Berry', SYSDATE);
-
-/************************************************/
 /* EXCHANGE  */
 /************************************************/
 
