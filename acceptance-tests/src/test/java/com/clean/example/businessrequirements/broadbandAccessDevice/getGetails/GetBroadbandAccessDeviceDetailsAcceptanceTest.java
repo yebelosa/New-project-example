@@ -1,24 +1,24 @@
 package com.clean.example.businessrequirements.broadbandAccessDevice.getGetails;
 
 import com.clean.example.core.domain.BroadbandAccessDevice;
+import com.clean.example.core.domain.Exchange;
 import com.clean.example.core.usecase.broadbandaccessdevice.getdetails.DeviceNotFoundException;
 import com.clean.example.core.usecase.broadbandaccessdevice.getdetails.GetBroadbandAccessDeviceDetailsUseCase;
 import com.clean.example.core.usecase.broadbandaccessdevice.getdetails.GetDeviceDetails;
 import com.clean.example.endtoend.broadbandAccessDevice.getGetails.GetBroadbandAccessDeviceDetailsEndToEndTest;
 import com.clean.example.yatspec.YatspecTest;
 import com.googlecode.yatspec.junit.LinkingNote;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@Ignore("TODO enable when production code is ready")
 @LinkingNote(message = "End to End test: %s", links = {GetBroadbandAccessDeviceDetailsEndToEndTest.class})
 public class GetBroadbandAccessDeviceDetailsAcceptanceTest extends YatspecTest {
 
-    private static final String HOSTNAME = "device1.hostname.com";
+    private static final String EXCHANGE_CODE = "exch1";
+    private static final String HOSTNAME = "device1.exch1.com";
     private static final String SERIAL_NUMBER = "serialNumber1";
 
     GetDeviceDetails getDeviceDetails = mock(GetDeviceDetails.class);
@@ -48,6 +48,7 @@ public class GetBroadbandAccessDeviceDetailsAcceptanceTest extends YatspecTest {
 
     private void givenADeviceInOurModel() {
         BroadbandAccessDevice device = new BroadbandAccessDevice(HOSTNAME, SERIAL_NUMBER);
+        device.setExchange(new Exchange(EXCHANGE_CODE, "exchangeName", "exchangePostcode"));
         when(getDeviceDetails.getDetails(HOSTNAME)).thenReturn(device);
         log("Device in model", device);
     }
@@ -59,7 +60,7 @@ public class GetBroadbandAccessDeviceDetailsAcceptanceTest extends YatspecTest {
     private void whenTheApiToGetTheDeviceDetailsIsCalledForThatDevice() {
         try {
             deviceDetails = getBroadbandAccessDeviceDetailsUseCase.getDeviceDetails(HOSTNAME);
-            log("Device details returned from API", deviceDetails);
+            log("Device details returned", deviceDetails);
         } catch (DeviceNotFoundException e) {
             this.deviceNotFoundException = e;
             log("Error received", deviceNotFoundException);
