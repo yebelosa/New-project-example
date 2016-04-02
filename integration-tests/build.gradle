@@ -1,8 +1,7 @@
 description = "Integration Tests for checking the entrypoints and dataproviders"
 
 test {
-
-    // make gradle print the test result for each test in the build (we like to see the acceptance tests running)
+    // make gradle print the test result for each test in the build (we like to see the integration tests running)
     testLogging {
         events "passed", "skipped", "failed"
     }
@@ -26,5 +25,4 @@ dependencies {
     compile libs.integration_test
 
     testCompile project(":acceptance-tests")
-    testCompile libs.acceptance_tests
 }
