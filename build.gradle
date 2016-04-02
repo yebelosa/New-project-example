@@ -51,8 +51,7 @@ subprojects {
 
             database_initialisation: [
                     "org.springframework:spring-jdbc:${spring_version}",
-                    "com.h2database:h2:1.4.191",
-                    "org.springframework:spring-tx:${spring_version}"
+                    "com.h2database:h2:1.4.191"
             ],
 
             database               : [
