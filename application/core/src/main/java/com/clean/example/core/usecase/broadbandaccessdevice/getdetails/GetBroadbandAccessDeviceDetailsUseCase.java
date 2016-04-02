@@ -3,11 +3,21 @@ package com.clean.example.core.usecase.broadbandaccessdevice.getdetails;
 import com.clean.example.core.domain.BroadbandAccessDevice;
 
 public class GetBroadbandAccessDeviceDetailsUseCase {
-    public GetBroadbandAccessDeviceDetailsUseCase(GetDeviceDetails getDeviceDetails) {
 
+    private final GetDeviceDetails getDeviceDetails;
+
+    public GetBroadbandAccessDeviceDetailsUseCase(GetDeviceDetails getDeviceDetails) {
+        this.getDeviceDetails = getDeviceDetails;
     }
 
     public BroadbandAccessDevice getDeviceDetails(String hostname) {
-        return null;
+        BroadbandAccessDevice device = getDeviceDetails.getDetails(hostname);
+
+        if(device == null) {
+            throw new DeviceNotFoundException();
+        }
+
+        return device;
     }
+
 }
