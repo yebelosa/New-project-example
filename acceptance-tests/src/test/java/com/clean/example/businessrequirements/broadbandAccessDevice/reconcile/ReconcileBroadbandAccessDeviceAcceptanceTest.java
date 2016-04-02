@@ -30,8 +30,7 @@ public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
     private static final String SERIAL_NUMBER_1 = "originalSerialNumber1";
     private static final String SERIAL_NUMBER_2 = "originalSerialNumber2";
     private static final String NEW_SERIAL_NUMBER_1 = "newSerialNumber1";
-    private static final String NEW_SERIAL_NUMBER_2 = "newSerialNumber2";
-    public static final String INVALID_SERIAL_NUMBER = "invalidSerialNumberBecauseItIsTooLong";
+    private static final String INVALID_SERIAL_NUMBER = "invalidSerialNumberBecauseItIsTooLong";
 
     GetAllDeviceHostnames getAllDeviceHostnames = mock(GetAllDeviceHostnames.class);
     GetSerialNumberFromModel getSerialNumberFromModel = mock(GetSerialNumberFromModel.class);
