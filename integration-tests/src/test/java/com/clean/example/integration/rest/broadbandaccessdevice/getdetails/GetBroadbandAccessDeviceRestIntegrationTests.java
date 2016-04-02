@@ -1,11 +1,12 @@
 package com.clean.example.integration.rest.broadbandaccessdevice.getdetails;
 
 import com.clean.example.core.domain.BroadbandAccessDevice;
+import com.clean.example.core.domain.Exchange;
+import com.clean.example.core.usecase.broadbandaccessdevice.getdetails.DeviceNotFoundException;
 import com.clean.example.core.usecase.broadbandaccessdevice.getdetails.GetBroadbandAccessDeviceDetailsUseCase;
 import com.clean.example.entrypoints.rest.broadbandaccessdevice.GetBroadbandAccessDeviceEndpoint;
 import com.clean.example.yatspec.YatspecTest;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,10 +19,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-@Ignore("TODO enable when production code is ready")
 public class GetBroadbandAccessDeviceRestIntegrationTests extends YatspecTest {
 
-    private static final String HOSTNAME = "device1.hostname.com";
+    private static final String EXCHANGE_CODE = "exchange";
+    private static final String HOSTNAME = "device1.exchange.com";
     private static final String SERIAL_NUMBER = "serialNumber1";
 
     GetBroadbandAccessDeviceDetailsUseCase getBroadbandAccessDeviceDetailsUseCase = mock(GetBroadbandAccessDeviceDetailsUseCase.class);
@@ -59,11 +60,12 @@ public class GetBroadbandAccessDeviceRestIntegrationTests extends YatspecTest {
 
     private void givenADeviceExists() {
         BroadbandAccessDevice device = new BroadbandAccessDevice(HOSTNAME, SERIAL_NUMBER);
+        device.setExchange(new Exchange(EXCHANGE_CODE, "exchangeName", "exchangePostcode"));
         when(getBroadbandAccessDeviceDetailsUseCase.getDeviceDetails(HOSTNAME)).thenReturn(device);
     }
 
     private void givenADeviceDoesNotExist() {
-        when(getBroadbandAccessDeviceDetailsUseCase.getDeviceDetails(HOSTNAME)).thenReturn(null);
+        when(getBroadbandAccessDeviceDetailsUseCase.getDeviceDetails(HOSTNAME)).thenThrow(new DeviceNotFoundException());
     }
 
     private void whenTheGetDetailsApiIsCalled() throws Exception {
@@ -72,13 +74,18 @@ public class GetBroadbandAccessDeviceRestIntegrationTests extends YatspecTest {
         responseContent = mvcResult.getResponse().getContentAsString();
         responseStatusCode = mvcResult.getResponse().getStatus();
         log("Response: Status Code", responseStatusCode);
-        log("Response: Content", formatJson(responseContent));
     }
 
     private void thenTheDetailsAreReturned() {
+        log("Response: Content", formatJson(responseContent));
         assertThat(responseStatusCode).isEqualTo(200);
 
-        String expectedResponse = "TODO";
+        String expectedResponse =
+                "{\n" +
+                "  \"exchangeCode\":\"exchange\",\n" +
+                "  \"hostname\":\"device1.exchange.com\",\n" +
+                "  \"serialNumber\":\"serialNumber1\"\n" +
+                "}";
         JSONAssert.assertEquals(expectedResponse, responseContent, false);
     }
 
