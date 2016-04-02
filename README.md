@@ -23,5 +23,5 @@ Example project to show what Clean Architecture would look like (in Java)
     ./gradlew tasks
 ```
 Once the application is running, you can:
-- open http://localhost:8080/broadbandaccessdevice/device1.exlon.com/ and you should see some json
+- open <http://localhost:8080/broadbandaccessdevice/device1.exlon.com/> and you should see some json
 - look at the log and you should see a scheduled job running every 5 seconds (it prints something like _"Job Starting: ReconcileBroadbandAccessDeviceJob..."_)
