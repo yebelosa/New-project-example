@@ -2,6 +2,7 @@ package com.clean.example.dataproviders.network.broadbandaccessdevice;
 
 import com.clean.example.core.usecase.broadbandaccessdevice.GetSerialNumberFromReality;
 import com.clean.example.dataproviders.network.deviceclient.DeviceClient;
+import com.clean.example.dataproviders.network.deviceclient.DeviceConnectionTimeoutException;
 
 public class BroadbandAccessDeviceNetworkDataProvider implements GetSerialNumberFromReality {
 
@@ -13,7 +14,11 @@ public class BroadbandAccessDeviceNetworkDataProvider implements GetSerialNumber
 
     @Override
     public String getSerialNumber(String hostname) {
-        return deviceClient.getSerialNumber(hostname);
+        try {
+            return deviceClient.getSerialNumber(hostname);
+        } catch (DeviceConnectionTimeoutException e) {
+            return null;
+        }
     }
 
 }

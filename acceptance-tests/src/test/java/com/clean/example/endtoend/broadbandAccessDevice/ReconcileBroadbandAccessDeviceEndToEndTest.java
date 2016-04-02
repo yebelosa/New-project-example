@@ -8,14 +8,12 @@ import com.clean.example.dataproviders.network.deviceclient.DeviceConnectionTime
 import com.clean.example.endtoend.EndToEndYatspecTest;
 import com.clean.example.entrypoints.job.ScheduledJob;
 import com.googlecode.yatspec.junit.LinkingNote;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-@Ignore("TODO implement production code to make this pass")
 @LinkingNote(message = "Business Requirements: %s", links = {ReconcileBroadbandAccessDeviceAcceptanceTest.class})
 public class ReconcileBroadbandAccessDeviceEndToEndTest extends EndToEndYatspecTest {
 
