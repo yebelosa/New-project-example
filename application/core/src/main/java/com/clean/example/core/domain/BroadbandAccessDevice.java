@@ -4,8 +4,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class BroadbandAccessDevice {
 
-    private final String hostname;
-    private final String serialNumber;
+    private Exchange exchange;
+
+    private String hostname;
+    private String serialNumber;
 
     public BroadbandAccessDevice(String hostname, String serialNumber) {
         this.hostname = hostname;
@@ -18,6 +20,14 @@ public class BroadbandAccessDevice {
 
     public String getSerialNumber() {
         return serialNumber;
+    }
+
+    public Exchange getExchange() {
+        return exchange;
+    }
+
+    public void setExchange(Exchange exchange) {
+        this.exchange = exchange;
     }
 
     @Override
