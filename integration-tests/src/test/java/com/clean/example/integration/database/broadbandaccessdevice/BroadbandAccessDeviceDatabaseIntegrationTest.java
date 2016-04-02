@@ -1,5 +1,6 @@
 package com.clean.example.integration.database.broadbandaccessdevice;
 
+import com.clean.example.core.domain.BroadbandAccessDevice;
 import com.clean.example.core.domain.Exchange;
 import com.clean.example.dataproviders.database.broadbandaccessdevice.BroadbandAccessDeviceDatabaseDataProvider;
 import com.clean.example.dataproviders.database.exchange.ExchangeDatabaseDataProvider;
@@ -15,6 +16,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegrationTest {
 
     public static final String EXCHANGE_CODE = "exch1";
+    public static final String EXCHANGE_NAME = "Exchange for test";
+    public static final String EXCHANGE_POSTCODE = "PostCode";
 
     @Autowired
     BroadbandAccessDeviceDatabaseDataProvider broadbandAccessDeviceDatabaseDataProvider;
@@ -57,15 +60,26 @@ public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegr
         assertThat(serialNumber).isEqualTo("newSerialNumber");
     }
 
+    @Test
+    public void getsDeviceDetails() throws Exception {
+        givenABroadbandAccessDevice("hostname1", "serialNumber1");
+
+        BroadbandAccessDevice device = broadbandAccessDeviceDatabaseDataProvider.getDetails("hostname1");
+
+        assertThat(device.getHostname()).isEqualTo("hostname1");
+        assertThat(device.getSerialNumber()).isEqualTo("serialNumber1");
+        assertThat(device.getExchange().getCode()).isEqualTo(EXCHANGE_CODE);
+        assertThat(device.getExchange().getName()).isEqualTo(EXCHANGE_NAME);
+        assertThat(device.getExchange().getPostCode()).isEqualTo(EXCHANGE_POSTCODE);
+    }
+
     private void cleanUpDatabase() {
         jdbcTemplate.update("DELETE FROM CLEAN_ARCHITECTURE.BB_ACCESS_DEVICE");
         jdbcTemplate.update("DELETE FROM CLEAN_ARCHITECTURE.EXCHANGE");
     }
 
     private void givenAnExistingExchange() {
-        String exchangeName = "Exchange for test";
-        String exchangePostcode = "PostCode";
-        exchangeDatabaseDataProvider.insert(new Exchange(EXCHANGE_CODE, exchangeName, exchangePostcode));
+        exchangeDatabaseDataProvider.insert(new Exchange(EXCHANGE_CODE, EXCHANGE_NAME, EXCHANGE_POSTCODE));
     }
 
     private void givenABroadbandAccessDevice(String hostname) {

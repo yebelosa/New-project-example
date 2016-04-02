@@ -1,12 +1,11 @@
 package com.clean.example.dataproviders.database.broadbandaccessdevice;
 
+import com.clean.example.core.domain.BroadbandAccessDevice;
 import org.junit.Test;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyString;
@@ -62,6 +61,28 @@ public class BroadbandAccessDeviceDatabaseDataProviderTest {
         verify(jdbcTemplate).update(anyString(), eq("newSerialNumber"), eq("hostname1"));
     }
 
+    @Test
+    public void returnsTheDetailsOfADevice() throws Exception {
+        givenThereIsADevice("exchangeCode", "exchangeName", "exchangePostcode", "hostname", "serialNumber");
+
+        BroadbandAccessDevice device = broadbandAccessDeviceDatabaseDataProvider.getDetails("hostname");
+
+        assertThat(device.getHostname()).isEqualTo("hostname");
+        assertThat(device.getSerialNumber()).isEqualTo("serialNumber");
+        assertThat(device.getExchange().getCode()).isEqualTo("exchangeCode");
+        assertThat(device.getExchange().getName()).isEqualTo("exchangeName");
+        assertThat(device.getExchange().getPostCode()).isEqualTo("exchangePostcode");
+    }
+
+    @Test
+    public void returnsNullWhenTheDeviceIsNotFound() throws Exception {
+        givenThereIsntADevice();
+
+        BroadbandAccessDevice device = broadbandAccessDeviceDatabaseDataProvider.getDetails("hostname");
+
+        assertThat(device).isNull();
+    }
+
     private void givenThereAreNoDevices() {
         when(jdbcTemplate.queryForList(anyString(), eq(String.class))).thenReturn(new ArrayList<>());
     }
@@ -72,6 +93,20 @@ public class BroadbandAccessDeviceDatabaseDataProviderTest {
 
     private void givenDeviceHasSerialNumber(String hostname, String serialNumber) {
         when(jdbcTemplate.queryForObject(anyString(), eq(String.class), eq(hostname))).thenReturn(serialNumber);
+    }
+
+    private void givenThereIsADevice(String exchangeCode, String exchangeName, String exchangePostcode, String hostname, String serialNumber) {
+        Map<String, Object> details = new HashMap<>();
+        details.put("ex_code", exchangeCode);
+        details.put("ex_name", exchangeName);
+        details.put("ex_postcode", exchangePostcode);
+        details.put("hostname", hostname);
+        details.put("serial_number", serialNumber);
+        when(jdbcTemplate.queryForMap(anyString(), anyVararg())).thenReturn(details);
+    }
+
+    private void givenThereIsntADevice() {
+        when(jdbcTemplate.queryForMap(anyString(), anyVararg())).thenThrow(new IncorrectResultSizeDataAccessException(1));
     }
 
     private void thereThereAreDevices(String... hostnames) {
