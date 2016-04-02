@@ -37,9 +37,9 @@ public class BroadbandAccessDeviceDatabaseDataProvider implements GetAllDeviceHo
         jdbcTemplate.update("UPDATE clean_architecture.bb_access_device SET serial_number = ? WHERE hostname = ?", serialNumber, hostname);
     }
 
-    public void insert(String hostname, String serialNumber) {
-        jdbcTemplate.update("INSERT INTO clean_architecture.bb_access_device (id, hostname, serial_number, created_date) " +
-                " VALUES (bb_access_device_id_seq.nextval, ?, ?, sysdate)", hostname, serialNumber);
+    public void insert(String exchangeCode, String hostname, String serialNumber) {
+        jdbcTemplate.update("INSERT INTO clean_architecture.bb_access_device (id, exchange_id, hostname, serial_number, created_date) " +
+                " VALUES (bb_access_device_id_seq.nextval, (SELECT id FROM clean_architecture.exchange WHERE code = ?), ?, ?, sysdate)", exchangeCode, hostname, serialNumber);
     }
 
     public BroadbandAccessDevice getByHostname(String hostname) {

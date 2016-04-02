@@ -2,12 +2,15 @@ package com.clean.example.endtoend.broadbandAccessDevice.reconcile;
 
 import com.clean.example.businessrequirements.broadbandAccessDevice.reconcile.ReconcileBroadbandAccessDeviceAcceptanceTest;
 import com.clean.example.core.domain.BroadbandAccessDevice;
+import com.clean.example.core.domain.Exchange;
 import com.clean.example.dataproviders.database.broadbandaccessdevice.BroadbandAccessDeviceDatabaseDataProvider;
+import com.clean.example.dataproviders.database.exchange.ExchangeDatabaseDataProvider;
 import com.clean.example.dataproviders.network.deviceclient.DeviceClient;
 import com.clean.example.dataproviders.network.deviceclient.DeviceConnectionTimeoutException;
 import com.clean.example.endtoend.EndToEndYatspecTest;
 import com.clean.example.entrypoints.job.ScheduledJob;
 import com.googlecode.yatspec.junit.LinkingNote;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,6 +19,7 @@ import static org.mockito.Mockito.when;
 
 @LinkingNote(message = "Business Requirements: %s", links = {ReconcileBroadbandAccessDeviceAcceptanceTest.class})
 public class ReconcileBroadbandAccessDeviceEndToEndTest extends EndToEndYatspecTest {
+    public static final String EXCHANGE_CODE = "exCode";
 
     // this end-to-end test starts the application and fires up a real job, using a real database (but mocking third-parties)
     // it sits at the top of the testing pyramid for automated tests, as it's the most expensive type
@@ -34,6 +38,14 @@ public class ReconcileBroadbandAccessDeviceEndToEndTest extends EndToEndYatspecT
     @Autowired
     DeviceClient mockDeviceClient;
 
+    @Autowired
+    ExchangeDatabaseDataProvider exchangeDatabaseDataProvider;
+
+    @Before
+    public void setUp() throws Exception {
+        givenAnExistingExchange();
+    }
+
     @Test
     public void jobAuditsSuccessesAndFailures() throws Exception {
         givenADeviceInTheModel(with(hostname("hostname1")), and(serialNumber("serial1")));
@@ -51,8 +63,13 @@ public class ReconcileBroadbandAccessDeviceEndToEndTest extends EndToEndYatspecT
         thenTheModelHasNotBeenUpdatedFor(hostname("hostname3"), with(serialNumber("serial3")));
     }
 
+    private void givenAnExistingExchange() {
+        Exchange exchange = new Exchange(EXCHANGE_CODE, "exName", "postcode");
+        exchangeDatabaseDataProvider.insert(exchange);
+    }
+
     private void givenADeviceInTheModel(String hostname, String serialNumber) {
-        broadbandAccessDeviceDatabaseDataProvider.insert(hostname, serialNumber);
+        broadbandAccessDeviceDatabaseDataProvider.insert(EXCHANGE_CODE, hostname, serialNumber);
         log("Device " + hostname + " in model before reconciliation", "Hostname: " + hostname + ", Serial Number: " + serialNumber);
     }
 

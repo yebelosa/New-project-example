@@ -1,7 +1,9 @@
 package com.clean.example.endtoend.broadbandAccessDevice.getGetails;
 
 import com.clean.example.businessrequirements.broadbandAccessDevice.getGetails.GetBroadbandAccessDeviceDetailsAcceptanceTest;
+import com.clean.example.core.domain.Exchange;
 import com.clean.example.dataproviders.database.broadbandaccessdevice.BroadbandAccessDeviceDatabaseDataProvider;
+import com.clean.example.dataproviders.database.exchange.ExchangeDatabaseDataProvider;
 import com.clean.example.endtoend.EndToEndYatspecTest;
 import com.clean.example.entrypoints.rest.broadbandaccessdevice.GetBroadbandAccessDeviceEndpoint;
 import com.googlecode.yatspec.junit.LinkingNote;
@@ -19,11 +21,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 @LinkingNote(message = "Business Requirements: %s", links = {GetBroadbandAccessDeviceDetailsAcceptanceTest.class})
 public class GetBroadbandAccessDeviceDetailsEndToEndTest extends EndToEndYatspecTest {
 
-    private static final String HOSTNAME = "device1.hostname.com";
+    private static final String HOSTNAME = "device1.exchange1.com";
     private static final String SERIAL_NUMBER = "serialNumber1";
+    private static final String EXCHANGE_CODE = "exchange1";
+    private static final String EXCHANGE_NAME = "Exchange 1";
+    private static final String EXCHANGE_POSTCODE = "A1 B23";
 
     @Autowired
     BroadbandAccessDeviceDatabaseDataProvider broadbandAccessDeviceDatabaseDataProvider;
+
+    @Autowired
+    ExchangeDatabaseDataProvider exchangeDatabaseDataProvider;
 
     private int responseStatus;
     private String responseContent;
@@ -38,8 +46,9 @@ public class GetBroadbandAccessDeviceDetailsEndToEndTest extends EndToEndYatspec
     }
 
     private void givenADeviceInOurModel() {
-        broadbandAccessDeviceDatabaseDataProvider.insert(HOSTNAME, SERIAL_NUMBER);
-        log("Device in model", "Hostname: " + HOSTNAME + ", Serial Number: " + SERIAL_NUMBER);
+        exchangeDatabaseDataProvider.insert(new Exchange(EXCHANGE_CODE, EXCHANGE_NAME, EXCHANGE_POSTCODE));
+        broadbandAccessDeviceDatabaseDataProvider.insert(EXCHANGE_CODE, HOSTNAME, SERIAL_NUMBER);
+        log("Device in model", "Exchange Code: " + EXCHANGE_CODE + ", Hostname: " + HOSTNAME + ", Serial Number: " + SERIAL_NUMBER);
     }
 
     private void whenTheApiToGetTheDeviceDetailsIsCalledForThatDevice() throws UnirestException {
