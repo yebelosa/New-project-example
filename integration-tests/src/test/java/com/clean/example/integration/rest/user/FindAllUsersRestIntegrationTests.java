@@ -1,4 +1,4 @@
-package com.clean.example.integration.rest;
+package com.clean.example.integration.rest.user;
 
 import com.clean.example.core.domain.User;
 import com.clean.example.core.usecase.user.FindAllUsersUseCase;
