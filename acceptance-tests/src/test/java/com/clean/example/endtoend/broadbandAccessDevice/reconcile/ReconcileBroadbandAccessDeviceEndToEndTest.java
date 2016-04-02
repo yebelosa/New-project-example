@@ -1,4 +1,4 @@
-package com.clean.example.endtoend.broadbandAccessDevice;
+package com.clean.example.endtoend.broadbandAccessDevice.reconcile;
 
 import com.clean.example.businessrequirements.broadbandAccessDevice.ReconcileBroadbandAccessDeviceAcceptanceTest;
 import com.clean.example.core.domain.BroadbandAccessDevice;
@@ -53,14 +53,17 @@ public class ReconcileBroadbandAccessDeviceEndToEndTest extends EndToEndYatspecT
 
     private void givenADeviceInTheModel(String hostname, String serialNumber) {
         broadbandAccessDeviceDatabaseDataProvider.insert(hostname, serialNumber);
+        log("Device " + hostname + " in model before reconciliation", "Hostname: " + hostname + ", Serial Number: " + serialNumber);
     }
 
     private void givenADeviceInReality(String hostname, String serialNumber) {
         when(mockDeviceClient.getSerialNumber(hostname)).thenReturn(serialNumber);
+        log("Device " + hostname + " in reality", "Hostname: " + hostname + ", Serial Number: " + serialNumber);
     }
 
     private void givenADeviceThatIsNotResponding(String hostname) {
         when(mockDeviceClient.getSerialNumber(hostname)).thenThrow(new DeviceConnectionTimeoutException());
+        log("Device " + hostname + " in reality", "Hostname: " + hostname + " -> NOT RESPONDING");
     }
 
     private String hostname(String hostname) {
@@ -78,11 +81,13 @@ public class ReconcileBroadbandAccessDeviceEndToEndTest extends EndToEndYatspecT
     private void thenTheModelHasBeenUpdatedFor(String hostname, String expectedSerialNumber) {
         BroadbandAccessDevice device = broadbandAccessDeviceDatabaseDataProvider.getByHostname(hostname);
         assertThat(device.getSerialNumber()).isEqualTo(expectedSerialNumber);
+        log("Device " + hostname + " in model after reconciliation", "Hostname: " + hostname + ", Serial Number: " + expectedSerialNumber);
     }
 
     private void thenTheModelHasNotBeenUpdatedFor(String hostname, String expectedSerialNumber) {
         BroadbandAccessDevice device = broadbandAccessDeviceDatabaseDataProvider.getByHostname(hostname);
         assertThat(device.getSerialNumber()).isEqualTo(expectedSerialNumber);
+        log("Device " + hostname + " in model after reconciliation", "Hostname: " + hostname + ", Serial Number: " + expectedSerialNumber);
     }
 
 }

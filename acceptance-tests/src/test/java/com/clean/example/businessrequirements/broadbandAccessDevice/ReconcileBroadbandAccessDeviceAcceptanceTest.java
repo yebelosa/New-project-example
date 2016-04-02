@@ -3,7 +3,7 @@ package com.clean.example.businessrequirements.broadbandAccessDevice;
 import com.clean.example.core.usecase.broadbandaccessdevice.*;
 import com.clean.example.core.usecase.job.OnFailure;
 import com.clean.example.core.usecase.job.OnSuccess;
-import com.clean.example.endtoend.broadbandAccessDevice.ReconcileBroadbandAccessDeviceEndToEndTest;
+import com.clean.example.endtoend.broadbandAccessDevice.reconcile.ReconcileBroadbandAccessDeviceEndToEndTest;
 import com.clean.example.yatspec.YatspecTest;
 import com.googlecode.yatspec.junit.LinkingNote;
 import com.googlecode.yatspec.junit.Notes;
