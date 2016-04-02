@@ -66,8 +66,8 @@ public class ReconcileBroadbandAccessDeviceJobTest {
         ArgumentCaptor<OnSuccess> onSuccessArgumentCaptor = ArgumentCaptor.forClass(OnSuccess.class);
         ArgumentCaptor<OnFailure> onFailureArgumentCaptor = ArgumentCaptor.forClass(OnFailure.class);
         verify(reconcileBroadbandAccessDevicesUseCase).reconcile(onSuccessArgumentCaptor.capture(), onFailureArgumentCaptor.capture());
-        onSuccessArgumentCaptor.getValue().onSuccess();
-        onFailureArgumentCaptor.getValue().onFailure();
+        onSuccessArgumentCaptor.getValue().auditSuccess();
+        onFailureArgumentCaptor.getValue().auditFailure();
     }
 
 }

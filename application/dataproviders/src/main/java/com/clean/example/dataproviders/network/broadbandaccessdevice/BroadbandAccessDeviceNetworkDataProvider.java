@@ -3,7 +3,7 @@ package com.clean.example.dataproviders.network.broadbandaccessdevice;
 import com.clean.example.core.usecase.broadbandaccessdevice.GetSerialNumberFromReality;
 import com.clean.example.dataproviders.network.deviceclient.DeviceClient;
 
-public class BroadbandAccessDeviceNetworkDataProvider implements GetSerialNumberFromReality{
+public class BroadbandAccessDeviceNetworkDataProvider implements GetSerialNumberFromReality {
 
     private DeviceClient deviceClient;
 

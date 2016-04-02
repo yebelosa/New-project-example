@@ -156,18 +156,18 @@ public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
     }
 
     private void thenNoSuccessOrFailureIsRecorded() {
-        verify(onSuccess, never()).onSuccess();
-        verify(onFailure, never()).onFailure();
+        verify(onSuccess, never()).auditSuccess();
+        verify(onFailure, never()).auditFailure();
     }
 
     private void thenASuccessIsRecorded() {
-        verify(onSuccess).onSuccess();
-        verify(onFailure, never()).onFailure();
+        verify(onSuccess).auditSuccess();
+        verify(onFailure, never()).auditFailure();
     }
 
     private void thenAnErrorIsRecored() {
-        verify(onSuccess, never()).onSuccess();
-        verify(onFailure).onFailure();
+        verify(onSuccess, never()).auditSuccess();
+        verify(onFailure).auditFailure();
     }
 
 }
