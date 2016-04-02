@@ -10,14 +10,13 @@ import com.googlecode.yatspec.junit.LinkingNote;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static com.cedarsoftware.util.io.JsonWriter.formatJson;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Ignore("TODO enable when production code is ready")
 @LinkingNote(message = "Business Requirements: %s", links = {GetBroadbandAccessDeviceDetailsAcceptanceTest.class})
 public class GetBroadbandAccessDeviceDetailsEndToEndTest extends EndToEndYatspecTest {
 
@@ -48,7 +47,7 @@ public class GetBroadbandAccessDeviceDetailsEndToEndTest extends EndToEndYatspec
     private void givenADeviceInOurModel() {
         exchangeDatabaseDataProvider.insert(new Exchange(EXCHANGE_CODE, EXCHANGE_NAME, EXCHANGE_POSTCODE));
         broadbandAccessDeviceDatabaseDataProvider.insert(EXCHANGE_CODE, HOSTNAME, SERIAL_NUMBER);
-        log("Device in model", "Exchange Code: " + EXCHANGE_CODE + ", Hostname: " + HOSTNAME + ", Serial Number: " + SERIAL_NUMBER);
+        log("Device in model", "Exchange Code: " + EXCHANGE_CODE + "\nHostname: " + HOSTNAME + "\nSerial Number: " + SERIAL_NUMBER);
     }
 
     private void whenTheApiToGetTheDeviceDetailsIsCalledForThatDevice() throws UnirestException {
@@ -62,13 +61,18 @@ public class GetBroadbandAccessDeviceDetailsEndToEndTest extends EndToEndYatspec
         log("Response Status", responseStatus);
 
         responseContent = httpResponse.getBody();
-        log("Response Content", responseContent); // TODO might need to prettify this?
+        log("Response Content", formatJson(responseContent));
     }
 
     private void thenTheDetailsOfTheDeviceAreReturned() {
         assertThat(responseStatus).isEqualTo(200);
 
-        String expectedResponse = "TODO";
+        String expectedResponse =
+                "{\n" +
+                "  \"exchangeCode\":\"" + EXCHANGE_CODE + "\",\n" +
+                "  \"hostname\":\"" + HOSTNAME + "\",\n" +
+                "  \"serialNumber\":\"" + SERIAL_NUMBER + "\"\n" +
+                "}";
         JSONAssert.assertEquals(expectedResponse, responseContent, false);
     }
 
