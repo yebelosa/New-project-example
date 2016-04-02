@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ReconcileBroadbandAccessDevicesUseCase {
 
-    public static final int MAX_SERIAL_NUMBER_LENGTH = 15;
+    public static final int MAX_SERIAL_NUMBER_LENGTH = 25;
 
     private final GetAllDeviceHostnames getAllDeviceHostnames;
     private final GetSerialNumberFromModel getSerialNumberFromModel;

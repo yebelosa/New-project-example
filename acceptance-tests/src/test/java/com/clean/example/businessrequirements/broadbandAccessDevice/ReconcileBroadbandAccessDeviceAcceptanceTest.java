@@ -3,12 +3,10 @@ package com.clean.example.businessrequirements.broadbandAccessDevice;
 import com.clean.example.core.usecase.broadbandaccessdevice.*;
 import com.clean.example.core.usecase.job.OnFailure;
 import com.clean.example.core.usecase.job.OnSuccess;
-import com.clean.example.dataproviders.network.deviceclient.DeviceConnectionTimeoutException;
 import com.clean.example.endtoend.broadbandAccessDevice.ReconcileBroadbandAccessDeviceEndToEndTest;
 import com.clean.example.yatspec.YatspecTest;
 import com.googlecode.yatspec.junit.LinkingNote;
 import com.googlecode.yatspec.junit.Notes;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -16,7 +14,6 @@ import java.util.Arrays;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
-@Ignore("TODO implement production code to make this pass")
 @Notes("Reconciles information about Broadband Access Devices between what is stored in our model and the data that comes back from the actual device")
 @LinkingNote(message = "End to End test: %s", links = {ReconcileBroadbandAccessDeviceEndToEndTest.class})
 public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
@@ -51,8 +48,8 @@ public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
 
         whenTheDeviceIsReconciled();
 
-        thenTheDeviceInTheModelIsNotUpdated();
-        thenNoSuccessOrFailureIsRecorded();
+        thenTheDevicesInTheModelAreNotUpdated();
+        thenNoSuccessOrFailureIsAudited();
     }
 
     @Test
@@ -63,7 +60,7 @@ public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
         whenTheDeviceIsReconciled();
 
         thenTheDeviceInTheModelIsUpdatedWithTheNewSerialNumber();
-        thenASuccessIsRecorded();
+        thenASuccessIsAudited();
     }
 
     @Test
@@ -73,8 +70,8 @@ public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
 
         whenTheDeviceIsReconciled();
 
-        thenTheDeviceInTheModelIsNotUpdated();
-        thenAnErrorIsRecored();
+        thenTheDevicesInTheModelAreNotUpdated();
+        thenAnErrorIsAudited();
     }
 
     @Test
@@ -84,8 +81,8 @@ public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
 
         whenTheDeviceIsReconciled();
 
-        thenTheDeviceInTheModelIsNotUpdated();
-        thenAnErrorIsRecored();
+        thenTheDevicesInTheModelAreNotUpdated();
+        thenAnErrorIsAudited();
     }
 
     // GIVENs
@@ -128,7 +125,7 @@ public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
     }
 
     private void givenADeviceInRealityThatIsNotResponding() {
-        when(getSerialNumberFromReality.getSerialNumber(HOSTNAME_1)).thenThrow(new DeviceConnectionTimeoutException());
+        when(getSerialNumberFromReality.getSerialNumber(HOSTNAME_1)).thenReturn(null);
         when(getSerialNumberFromReality.getSerialNumber(HOSTNAME_2)).thenReturn(SERIAL_NUMBER_2);
 
         log("Devices in reality",
@@ -142,32 +139,38 @@ public class ReconcileBroadbandAccessDeviceAcceptanceTest extends YatspecTest {
     }
 
     // THENs
-    private void thenTheDeviceInTheModelIsNotUpdated() {
-        verify(updateSerialNumberInModel, never()).updateSerialNumber(eq(HOSTNAME_1), anyString());
-        log("Device in model after reconciliation", "Hostname: [" + HOSTNAME_1 + "], Serial Number: [" + SERIAL_NUMBER_1 + "]");
+    private void thenTheDevicesInTheModelAreNotUpdated() {
+        verify(updateSerialNumberInModel, never()).updateSerialNumber(anyString(), anyString());
+        log("Devices in model after reconciliation",
+                "Hostname: [" + HOSTNAME_1 + "], Serial Number: [" + SERIAL_NUMBER_1 + "]\n" +
+                "Hostname: [" + HOSTNAME_2 + "], Serial Number: [" + SERIAL_NUMBER_2 + "]");
     }
 
     private void thenTheDeviceInTheModelIsUpdatedWithTheNewSerialNumber() {
         verify(updateSerialNumberInModel).updateSerialNumber(HOSTNAME_1, NEW_SERIAL_NUMBER_1);
+        verify(updateSerialNumberInModel, never()).updateSerialNumber(eq(HOSTNAME_2), anyString());
 
         log("Devices in model after reconciliation",
                 "Hostname: [" + HOSTNAME_1 + "], Serial Number: [" + NEW_SERIAL_NUMBER_1 + "]\n" +
                 "Hostname: [" + HOSTNAME_2 + "], Serial Number: [" + SERIAL_NUMBER_2 + "]");
     }
 
-    private void thenNoSuccessOrFailureIsRecorded() {
+    private void thenNoSuccessOrFailureIsAudited() {
         verify(onSuccess, never()).auditSuccess();
         verify(onFailure, never()).auditFailure();
+        log("Successes and Failures", "Successes: 0\nFailures: 0");
     }
 
-    private void thenASuccessIsRecorded() {
+    private void thenASuccessIsAudited() {
         verify(onSuccess).auditSuccess();
         verify(onFailure, never()).auditFailure();
+        log("Successes and Failures", "Successes: 1\nFailures: 0");
     }
 
-    private void thenAnErrorIsRecored() {
+    private void thenAnErrorIsAudited() {
         verify(onSuccess, never()).auditSuccess();
         verify(onFailure).auditFailure();
+        log("Successes and Failures", "Successes: 0\nFailures: 1");
     }
 
 }
