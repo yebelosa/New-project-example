@@ -58,7 +58,7 @@ public class GetBroadbandAccessDeviceDetailsAcceptanceTest extends YatspecTest {
 
     private void whenTheApiToGetTheDeviceDetailsIsCalledForThatDevice() {
         try {
-            deviceDetails = getBroadbandAccessDeviceDetailsUseCase.getDeviceDetails();
+            deviceDetails = getBroadbandAccessDeviceDetailsUseCase.getDeviceDetails(HOSTNAME);
             log("Device details returned from API", deviceDetails);
         } catch (DeviceNotFoundException e) {
             this.deviceNotFoundException = e;

@@ -7,7 +7,7 @@ public class GetBroadbandAccessDeviceDetailsUseCase {
 
     }
 
-    public BroadbandAccessDevice getDeviceDetails() {
+    public BroadbandAccessDevice getDeviceDetails(String hostname) {
         return null;
     }
 }
