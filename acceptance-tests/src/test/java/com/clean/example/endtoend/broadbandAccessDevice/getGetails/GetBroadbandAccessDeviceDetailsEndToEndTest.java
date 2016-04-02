@@ -1,8 +1,10 @@
 package com.clean.example.endtoend.broadbandAccessDevice.getGetails;
 
+import com.clean.example.businessrequirements.broadbandAccessDevice.getGetails.GetBroadbandAccessDeviceDetailsAcceptanceTest;
 import com.clean.example.dataproviders.database.broadbandaccessdevice.BroadbandAccessDeviceDatabaseDataProvider;
 import com.clean.example.endtoend.EndToEndYatspecTest;
 import com.clean.example.entrypoints.rest.broadbandaccessdevice.GetBroadbandAccessDeviceEndpoint;
+import com.googlecode.yatspec.junit.LinkingNote;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Ignore("TODO enable when production code is ready")
+@LinkingNote(message = "Business Requirements: %s", links = {GetBroadbandAccessDeviceDetailsAcceptanceTest.class})
 public class GetBroadbandAccessDeviceDetailsEndToEndTest extends EndToEndYatspecTest {
 
     private static final String HOSTNAME = "device1.hostname.com";
