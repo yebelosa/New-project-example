@@ -1,9 +1,9 @@
 package com.clean.example.dataproviders.database.broadbandaccessdevice;
 
 import com.clean.example.core.domain.BroadbandAccessDevice;
-import com.clean.example.core.usecase.broadbandaccessdevice.GetAllDeviceHostnames;
-import com.clean.example.core.usecase.broadbandaccessdevice.GetSerialNumberFromModel;
-import com.clean.example.core.usecase.broadbandaccessdevice.UpdateSerialNumberInModel;
+import com.clean.example.core.usecase.broadbandaccessdevice.reconcile.GetAllDeviceHostnames;
+import com.clean.example.core.usecase.broadbandaccessdevice.reconcile.GetSerialNumberFromModel;
+import com.clean.example.core.usecase.broadbandaccessdevice.reconcile.UpdateSerialNumberInModel;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 

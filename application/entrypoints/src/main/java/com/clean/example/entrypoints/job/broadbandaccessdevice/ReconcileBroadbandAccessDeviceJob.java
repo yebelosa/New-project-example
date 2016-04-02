@@ -1,6 +1,6 @@
 package com.clean.example.entrypoints.job.broadbandaccessdevice;
 
-import com.clean.example.core.usecase.broadbandaccessdevice.ReconcileBroadbandAccessDevicesUseCase;
+import com.clean.example.core.usecase.broadbandaccessdevice.reconcile.ReconcileBroadbandAccessDevicesUseCase;
 import com.clean.example.core.usecase.job.OnFailure;
 import com.clean.example.core.usecase.job.OnSuccess;
 import com.clean.example.entrypoints.job.JobResults;

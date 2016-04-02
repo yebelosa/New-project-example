@@ -1,4 +1,4 @@
-package com.clean.example.core.usecase.broadbandaccessdevice;
+package com.clean.example.core.usecase.broadbandaccessdevice.reconcile;
 
 public interface GetSerialNumberFromModel {
 

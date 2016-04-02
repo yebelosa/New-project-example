@@ -1,6 +1,6 @@
 package com.clean.example.configuration;
 
-import com.clean.example.core.usecase.broadbandaccessdevice.ReconcileBroadbandAccessDevicesUseCase;
+import com.clean.example.core.usecase.broadbandaccessdevice.reconcile.ReconcileBroadbandAccessDevicesUseCase;
 import com.clean.example.core.usecase.user.FindAllUsersUseCase;
 import com.clean.example.entrypoints.job.JobResults;
 import com.clean.example.entrypoints.job.ScheduledJob;

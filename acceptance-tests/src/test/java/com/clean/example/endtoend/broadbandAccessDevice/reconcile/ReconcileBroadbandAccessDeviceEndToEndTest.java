@@ -1,6 +1,6 @@
 package com.clean.example.endtoend.broadbandAccessDevice.reconcile;
 
-import com.clean.example.businessrequirements.broadbandAccessDevice.ReconcileBroadbandAccessDeviceAcceptanceTest;
+import com.clean.example.businessrequirements.broadbandAccessDevice.reconcile.ReconcileBroadbandAccessDeviceAcceptanceTest;
 import com.clean.example.core.domain.BroadbandAccessDevice;
 import com.clean.example.dataproviders.database.broadbandaccessdevice.BroadbandAccessDeviceDatabaseDataProvider;
 import com.clean.example.dataproviders.network.deviceclient.DeviceClient;

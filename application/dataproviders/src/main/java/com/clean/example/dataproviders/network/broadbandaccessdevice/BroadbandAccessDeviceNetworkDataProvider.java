@@ -1,6 +1,6 @@
 package com.clean.example.dataproviders.network.broadbandaccessdevice;
 
-import com.clean.example.core.usecase.broadbandaccessdevice.GetSerialNumberFromReality;
+import com.clean.example.core.usecase.broadbandaccessdevice.reconcile.GetSerialNumberFromReality;
 import com.clean.example.dataproviders.network.deviceclient.DeviceClient;
 import com.clean.example.dataproviders.network.deviceclient.DeviceConnectionTimeoutException;
 

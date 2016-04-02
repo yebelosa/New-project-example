@@ -1,6 +1,6 @@
 package com.clean.example.configuration;
 
-import com.clean.example.core.usecase.broadbandaccessdevice.*;
+import com.clean.example.core.usecase.broadbandaccessdevice.reconcile.*;
 import com.clean.example.core.usecase.user.FindAllUsers;
 import com.clean.example.core.usecase.user.FindAllUsersUseCase;
 import org.springframework.context.annotation.Bean;
