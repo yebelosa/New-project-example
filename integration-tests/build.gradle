@@ -1,9 +1,18 @@
 description = "Integration Tests for checking the entrypoints and dataproviders"
 
 test {
-    // make gradle print the test result for each test in the build (we like to see the integration tests running)
+
+    // make gradle print the test result for each test in the build (we like to see the acceptance tests running)
     testLogging {
         events "passed", "skipped", "failed"
+    }
+
+    // set the output folder for the acceptance tests that use yatspec, and print the full path after the test execution
+    systemProperty "yatspec.output.dir", "build/reports/yatspec"
+    doLast {
+        println "==========================================================================================="
+        println "Integration tests output: ${project.buildDir.absolutePath}/reports/yatspec/com/clean/example"
+        println "==========================================================================================="
     }
 }
 
