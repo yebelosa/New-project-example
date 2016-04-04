@@ -1,5 +1,18 @@
 # clean-architecture-example
-Example project to show what Clean Architecture would look like (in Java)
+This is an example project to show what Clean Architecture would look like (in Java).
+
+It goes together with [this presentation](TODO) (**TODO** put link to presentation when published)
+
+## Application Structure
+**TODO**
+Explain what the different modules do
+Include the diagram from the presentation when ready
+Show a sequence diagram for an API call
+Show a sequence diagram for a scheduled job
+
+## Testing Strategy
+**TODO**
+Explain how the testing pyramid is implemented
 
 ## Building and Running the application
 - building the application:
@@ -25,3 +38,15 @@ Example project to show what Clean Architecture would look like (in Java)
 Once the application is running, you can:
 - open <http://localhost:8080/broadbandaccessdevice/device1.exlon.com/> and you should see some json
 - look at the log and you should see a scheduled job running every 5 seconds (it prints something like _"Job Starting: ReconcileBroadbandAccessDeviceJob..."_)
+
+## Why Clean Architecture?
+**TODO**
+Explain what problem we're trying to solve
+Explain pros and cons
+
+## The example domain
+**TODO**
+Explain what the domain used in the example is
+
+## Resources
+**TODO**
