@@ -4,7 +4,7 @@ This is an example project to show what Clean Architecture would look like (in J
 It goes together with [this presentation](TODO) (**TODO** put link to presentation when published)
 
 **Table of Contents**
-* [Why Clean Architecture?](why-clean-architecture)
+* [Why Clean Architecture?](#why-clean-architecture)
 * [Application Structure](#application-structure)
 * [Testing Strategy](#testing-strategy)
 * [Building and Running the application](#building-and-running-the-application)
