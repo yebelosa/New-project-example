@@ -7,6 +7,11 @@ public class Capacity {
     private boolean fibre;
     private boolean adsl;
 
+    public Capacity(boolean fibre, boolean adsl) {
+        this.fibre = fibre;
+        this.adsl = adsl;
+    }
+
     public boolean hasAdslCapacity() {
         return false;
     }

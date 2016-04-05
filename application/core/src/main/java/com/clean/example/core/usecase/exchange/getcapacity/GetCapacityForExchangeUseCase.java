@@ -16,7 +16,7 @@ public class GetCapacityForExchangeUseCase {
         // }
         // decide getcapacity
         // needs at least 5 available ports
-        return new Capacity();
+        return new Capacity(false, false);
     }
 
 }
