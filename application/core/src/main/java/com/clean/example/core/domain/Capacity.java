@@ -4,20 +4,20 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Capacity {
 
-    private boolean fibre;
     private boolean adsl;
+    private boolean fibre;
 
-    public Capacity(boolean fibre, boolean adsl) {
+    public Capacity(boolean adsl, boolean fibre) {
         this.fibre = fibre;
         this.adsl = adsl;
     }
 
     public boolean hasAdslCapacity() {
-        return false;
+        return adsl;
     }
 
     public boolean hasFibreCapacity() {
-        return false;
+        return fibre;
     }
 
     @Override

@@ -6,7 +6,6 @@ import com.clean.example.core.usecase.exchange.getcapacity.GetCapacityForExchang
 import com.clean.example.entrypoints.rest.exchange.capacity.GetCapacityForExchangeEndpoint;
 import com.clean.example.yatspec.YatspecTest;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,7 +18,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-@Ignore("TODO enable when production code is ready")
 public class GetCapacityForExchangeRestIntegrationTest extends YatspecTest {
 
     private static final String EXCHANGE_CODE = "exch1";
@@ -81,8 +79,8 @@ public class GetCapacityForExchangeRestIntegrationTest extends YatspecTest {
 
         String expectedResponse =
                 "{\n" +
-                "  \"hasADSLCapacity\":\"true\",\n" +
-                "  \"hasFibreCapacity\":\"false\"\n" +
+                "  \"hasADSLCapacity\":true,\n" +
+                "  \"hasFibreCapacity\":false\n" +
                 "}";
         JSONAssert.assertEquals(expectedResponse, responseContent, false);
     }
