@@ -5,7 +5,7 @@ import com.clean.example.core.domain.Capacity;
 import com.clean.example.core.domain.DeviceType;
 import com.clean.example.core.usecase.exchange.getcapacity.GetAvailablePortsOfAllDevicesInExchange;
 import com.clean.example.core.usecase.exchange.getcapacity.GetCapacityForExchangeUseCase;
-import com.clean.example.endtoend.exchange.capacity.GetCapacityForExchangeEndToEndTest;
+import com.clean.example.endtoend.exchange.getcapacity.GetCapacityForExchangeEndToEndTest;
 import com.clean.example.yatspec.YatspecTest;
 import com.googlecode.yatspec.junit.LinkingNote;
 import com.googlecode.yatspec.junit.Notes;

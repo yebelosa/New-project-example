@@ -1,4 +1,4 @@
-package com.clean.example.endtoend.exchange.capacity;
+package com.clean.example.endtoend.exchange.getcapacity;
 
 import com.clean.example.businessrequirements.exchange.getcapacity.GetCapacityForExchangeAcceptanceTest;
 import com.clean.example.core.domain.Exchange;
