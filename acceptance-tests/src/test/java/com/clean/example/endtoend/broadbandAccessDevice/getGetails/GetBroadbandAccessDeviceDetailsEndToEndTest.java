@@ -1,6 +1,7 @@
 package com.clean.example.endtoend.broadbandAccessDevice.getGetails;
 
 import com.clean.example.businessrequirements.broadbandAccessDevice.getGetails.GetBroadbandAccessDeviceDetailsAcceptanceTest;
+import com.clean.example.core.domain.DeviceType;
 import com.clean.example.core.domain.Exchange;
 import com.clean.example.dataproviders.database.broadbandaccessdevice.BroadbandAccessDeviceDatabaseDataProvider;
 import com.clean.example.dataproviders.database.exchange.ExchangeDatabaseDataProvider;
@@ -15,6 +16,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.cedarsoftware.util.io.JsonWriter.formatJson;
+import static com.clean.example.core.domain.DeviceType.ADSL;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @LinkingNote(message = "Business Requirements: %s", links = {GetBroadbandAccessDeviceDetailsAcceptanceTest.class})
@@ -25,6 +27,7 @@ public class GetBroadbandAccessDeviceDetailsEndToEndTest extends EndToEndYatspec
     private static final String EXCHANGE_CODE = "exchange1";
     private static final String EXCHANGE_NAME = "Exchange 1";
     private static final String EXCHANGE_POSTCODE = "A1 B23";
+    private static final DeviceType DEVICE_TYPE = ADSL;
 
     @Autowired
     BroadbandAccessDeviceDatabaseDataProvider broadbandAccessDeviceDatabaseDataProvider;
@@ -32,8 +35,8 @@ public class GetBroadbandAccessDeviceDetailsEndToEndTest extends EndToEndYatspec
     @Autowired
     ExchangeDatabaseDataProvider exchangeDatabaseDataProvider;
 
-    private int responseStatus;
-    private String responseContent;
+    int responseStatus;
+    String responseContent;
 
     @Test
     public void returnsTheDetailsOfADevice() throws Exception {
@@ -46,8 +49,8 @@ public class GetBroadbandAccessDeviceDetailsEndToEndTest extends EndToEndYatspec
 
     private void givenADeviceInOurModel() {
         exchangeDatabaseDataProvider.insert(new Exchange(EXCHANGE_CODE, EXCHANGE_NAME, EXCHANGE_POSTCODE));
-        broadbandAccessDeviceDatabaseDataProvider.insert(EXCHANGE_CODE, HOSTNAME, SERIAL_NUMBER);
-        log("Device in model", "Exchange Code: " + EXCHANGE_CODE + "\nHostname: " + HOSTNAME + "\nSerial Number: " + SERIAL_NUMBER);
+        broadbandAccessDeviceDatabaseDataProvider.insert(EXCHANGE_CODE, HOSTNAME, SERIAL_NUMBER, DEVICE_TYPE);
+        log("Device in model", "Exchange Code: " + EXCHANGE_CODE + "\nHostname: " + HOSTNAME + "\nSerial Number: " + SERIAL_NUMBER + "\nType: " + DEVICE_TYPE);
     }
 
     private void whenTheApiToGetTheDeviceDetailsIsCalledForThatDevice() throws UnirestException {
@@ -71,7 +74,8 @@ public class GetBroadbandAccessDeviceDetailsEndToEndTest extends EndToEndYatspec
                 "{\n" +
                 "  \"exchangeCode\":\"" + EXCHANGE_CODE + "\",\n" +
                 "  \"hostname\":\"" + HOSTNAME + "\",\n" +
-                "  \"serialNumber\":\"" + SERIAL_NUMBER + "\"\n" +
+                "  \"serialNumber\":\"" + SERIAL_NUMBER + "\",\n" +
+                "  \"type\":\"" + DEVICE_TYPE.name() + "\"\n" +
                 "}";
         JSONAssert.assertEquals(expectedResponse, responseContent, false);
     }

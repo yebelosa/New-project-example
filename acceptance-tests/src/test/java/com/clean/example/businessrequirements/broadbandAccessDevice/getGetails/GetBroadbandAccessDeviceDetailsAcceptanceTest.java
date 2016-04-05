@@ -1,6 +1,7 @@
 package com.clean.example.businessrequirements.broadbandAccessDevice.getGetails;
 
 import com.clean.example.core.domain.BroadbandAccessDevice;
+import com.clean.example.core.domain.DeviceType;
 import com.clean.example.core.domain.Exchange;
 import com.clean.example.core.usecase.broadbandaccessdevice.getdetails.DeviceNotFoundException;
 import com.clean.example.core.usecase.broadbandaccessdevice.getdetails.GetBroadbandAccessDeviceDetailsUseCase;
@@ -20,6 +21,7 @@ public class GetBroadbandAccessDeviceDetailsAcceptanceTest extends YatspecTest {
     private static final String EXCHANGE_CODE = "exch1";
     private static final String HOSTNAME = "device1.exch1.com";
     private static final String SERIAL_NUMBER = "serialNumber1";
+    private static final DeviceType DEVICE_TYPE = DeviceType.ADSL;
 
     GetDeviceDetails getDeviceDetails = mock(GetDeviceDetails.class);
 
@@ -47,7 +49,7 @@ public class GetBroadbandAccessDeviceDetailsAcceptanceTest extends YatspecTest {
     }
 
     private void givenADeviceInOurModel() {
-        BroadbandAccessDevice device = new BroadbandAccessDevice(HOSTNAME, SERIAL_NUMBER);
+        BroadbandAccessDevice device = new BroadbandAccessDevice(HOSTNAME, SERIAL_NUMBER, DEVICE_TYPE);
         device.setExchange(new Exchange(EXCHANGE_CODE, "exchangeName", "exchangePostcode"));
         when(getDeviceDetails.getDetails(HOSTNAME)).thenReturn(device);
         log("Device in model", device);
@@ -70,10 +72,12 @@ public class GetBroadbandAccessDeviceDetailsAcceptanceTest extends YatspecTest {
     private void thenTheDetailsOfTheDeviceAreReturned() {
         assertThat(deviceDetails.getHostname()).isEqualTo(HOSTNAME);
         assertThat(deviceDetails.getSerialNumber()).isEqualTo(SERIAL_NUMBER);
+        assertThat(deviceDetails.getType()).isEqualTo(DEVICE_TYPE);
+        assertThat(deviceDetails.getExchange().getCode()).isEqualTo(EXCHANGE_CODE);
     }
 
     private void thenAnErrorIsReturned() {
-
+        assertThat(deviceNotFoundException).isNotNull();
     }
 
 }

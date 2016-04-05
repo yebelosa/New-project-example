@@ -41,7 +41,8 @@ public class GetBroadbandAccessDeviceEndpoint {
         return new BroadbandAccessDeviceDto(
                 deviceDetails.getExchange().getCode(),
                 deviceDetails.getHostname(),
-                deviceDetails.getSerialNumber());
+                deviceDetails.getSerialNumber(),
+                deviceDetails.getType().name());
     }
 
 }

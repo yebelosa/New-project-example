@@ -3,6 +3,7 @@ package com.clean.example.core.usecase.broadbandaccessdevice.getdetails;
 import com.clean.example.core.domain.BroadbandAccessDevice;
 import org.junit.Test;
 
+import static com.clean.example.core.domain.DeviceType.ADSL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.mockito.Matchers.anyString;
@@ -32,7 +33,7 @@ public class GetBroadbandAccessDeviceDetailsUseCaseTest {
     }
 
     private BroadbandAccessDevice givenADeviceIsFound() {
-        BroadbandAccessDevice expectedDevice = new BroadbandAccessDevice("hostname1", "serialNumber");
+        BroadbandAccessDevice expectedDevice = new BroadbandAccessDevice("hostname1", "serialNumber", ADSL);
         when(getDeviceDetails.getDetails("hostname1")).thenReturn(expectedDevice);
         return expectedDevice;
     }

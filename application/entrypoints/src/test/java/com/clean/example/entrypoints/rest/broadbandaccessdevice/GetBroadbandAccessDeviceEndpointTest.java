@@ -1,6 +1,7 @@
 package com.clean.example.entrypoints.rest.broadbandaccessdevice;
 
 import com.clean.example.core.domain.BroadbandAccessDevice;
+import com.clean.example.core.domain.DeviceType;
 import com.clean.example.core.domain.Exchange;
 import com.clean.example.core.usecase.broadbandaccessdevice.getdetails.DeviceNotFoundException;
 import com.clean.example.core.usecase.broadbandaccessdevice.getdetails.GetBroadbandAccessDeviceDetailsUseCase;
@@ -16,6 +17,7 @@ public class GetBroadbandAccessDeviceEndpointTest {
 
     private static final String HOSTNAME = "device1.exchange.com";
     private static final String SERIAL_NUMBER = "serialNumber1";
+    private static final DeviceType DEVICE_TYPE = DeviceType.ADSL;
     private static final String EXCHANGE_CODE = "exchangeCode";
     private static final String EXCHANGE_NAME = "exchangeName";
     private static final String EXCHANGE_POSTCODE = "exchangePostcode";
@@ -33,6 +35,7 @@ public class GetBroadbandAccessDeviceEndpointTest {
         assertThat(deviceDto.getExchangeCode()).isEqualTo(EXCHANGE_CODE);
         assertThat(deviceDto.getHostname()).isEqualTo(HOSTNAME);
         assertThat(deviceDto.getSerialNumber()).isEqualTo(SERIAL_NUMBER);
+        assertThat(deviceDto.getType()).isEqualTo(DEVICE_TYPE.name());
     }
 
     @Test
@@ -43,7 +46,7 @@ public class GetBroadbandAccessDeviceEndpointTest {
     }
 
     private void givenADeviceExists() {
-        BroadbandAccessDevice device = new BroadbandAccessDevice(HOSTNAME, SERIAL_NUMBER);
+        BroadbandAccessDevice device = new BroadbandAccessDevice(HOSTNAME, SERIAL_NUMBER, DEVICE_TYPE);
         Exchange exchange = new Exchange(EXCHANGE_CODE, EXCHANGE_NAME, EXCHANGE_POSTCODE);
         device.setExchange(exchange);
         when(getBroadbandAccessDeviceDetailsUseCase.getDeviceDetails(HOSTNAME)).thenReturn(device);

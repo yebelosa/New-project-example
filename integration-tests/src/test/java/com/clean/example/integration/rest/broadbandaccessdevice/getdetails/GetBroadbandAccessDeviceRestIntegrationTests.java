@@ -1,6 +1,7 @@
 package com.clean.example.integration.rest.broadbandaccessdevice.getdetails;
 
 import com.clean.example.core.domain.BroadbandAccessDevice;
+import com.clean.example.core.domain.DeviceType;
 import com.clean.example.core.domain.Exchange;
 import com.clean.example.core.usecase.broadbandaccessdevice.getdetails.DeviceNotFoundException;
 import com.clean.example.core.usecase.broadbandaccessdevice.getdetails.GetBroadbandAccessDeviceDetailsUseCase;
@@ -24,6 +25,7 @@ public class GetBroadbandAccessDeviceRestIntegrationTests extends YatspecTest {
     private static final String EXCHANGE_CODE = "exchange";
     private static final String HOSTNAME = "device1.exchange.com";
     private static final String SERIAL_NUMBER = "serialNumber1";
+    private static final DeviceType DEVICE_TYPE = DeviceType.ADSL;
 
     GetBroadbandAccessDeviceDetailsUseCase getBroadbandAccessDeviceDetailsUseCase = mock(GetBroadbandAccessDeviceDetailsUseCase.class);
 
@@ -59,9 +61,10 @@ public class GetBroadbandAccessDeviceRestIntegrationTests extends YatspecTest {
     }
 
     private void givenADeviceExists() {
-        BroadbandAccessDevice device = new BroadbandAccessDevice(HOSTNAME, SERIAL_NUMBER);
+        BroadbandAccessDevice device = new BroadbandAccessDevice(HOSTNAME, SERIAL_NUMBER, DEVICE_TYPE);
         device.setExchange(new Exchange(EXCHANGE_CODE, "exchangeName", "exchangePostcode"));
         when(getBroadbandAccessDeviceDetailsUseCase.getDeviceDetails(HOSTNAME)).thenReturn(device);
+        log("Device in model", device);
     }
 
     private void givenADeviceDoesNotExist() {
@@ -84,7 +87,8 @@ public class GetBroadbandAccessDeviceRestIntegrationTests extends YatspecTest {
                 "{\n" +
                 "  \"exchangeCode\":\"exchange\",\n" +
                 "  \"hostname\":\"device1.exchange.com\",\n" +
-                "  \"serialNumber\":\"serialNumber1\"\n" +
+                "  \"serialNumber\":\"serialNumber1\",\n" +
+                "  \"type\":\"ADSL\"\n" +
                 "}";
         JSONAssert.assertEquals(expectedResponse, responseContent, false);
     }

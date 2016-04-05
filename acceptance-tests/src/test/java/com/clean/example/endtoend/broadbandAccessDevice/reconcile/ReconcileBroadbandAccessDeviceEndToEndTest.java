@@ -2,6 +2,7 @@ package com.clean.example.endtoend.broadbandAccessDevice.reconcile;
 
 import com.clean.example.businessrequirements.broadbandAccessDevice.reconcile.ReconcileBroadbandAccessDeviceAcceptanceTest;
 import com.clean.example.core.domain.BroadbandAccessDevice;
+import com.clean.example.core.domain.DeviceType;
 import com.clean.example.core.domain.Exchange;
 import com.clean.example.dataproviders.database.broadbandaccessdevice.BroadbandAccessDeviceDatabaseDataProvider;
 import com.clean.example.dataproviders.database.exchange.ExchangeDatabaseDataProvider;
@@ -69,7 +70,7 @@ public class ReconcileBroadbandAccessDeviceEndToEndTest extends EndToEndYatspecT
     }
 
     private void givenADeviceInTheModel(String hostname, String serialNumber) {
-        broadbandAccessDeviceDatabaseDataProvider.insert(EXCHANGE_CODE, hostname, serialNumber);
+        broadbandAccessDeviceDatabaseDataProvider.insert(EXCHANGE_CODE, hostname, serialNumber, DeviceType.ADSL);
         log("Device " + hostname + " in model before reconciliation", "Hostname: " + hostname + ", Serial Number: " + serialNumber);
     }
 

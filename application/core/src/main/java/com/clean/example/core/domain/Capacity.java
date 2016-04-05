@@ -2,7 +2,7 @@ package com.clean.example.core.domain;
 
 public class Capacity {
 
-    private boolean fiber;
-    private boolean data;
+    private boolean fibre;
+    private boolean adsl;
 
 }

@@ -1,10 +1,12 @@
 package com.clean.example.dataproviders.database.broadbandaccessdevice;
 
 import com.clean.example.core.domain.BroadbandAccessDevice;
+import com.clean.example.core.domain.DeviceType;
 import org.junit.Test;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -63,12 +65,14 @@ public class BroadbandAccessDeviceDatabaseDataProviderTest {
 
     @Test
     public void returnsTheDetailsOfADevice() throws Exception {
-        givenThereIsADevice("exchangeCode", "exchangeName", "exchangePostcode", "hostname", "serialNumber");
+        givenThereIsADevice("exchangeCode", "exchangeName", "exchangePostcode", "hostname", "serialNumber", DeviceType.ADSL, 123);
 
         BroadbandAccessDevice device = broadbandAccessDeviceDatabaseDataProvider.getDetails("hostname");
 
         assertThat(device.getHostname()).isEqualTo("hostname");
         assertThat(device.getSerialNumber()).isEqualTo("serialNumber");
+        assertThat(device.getType()).isEqualTo(DeviceType.ADSL);
+        assertThat(device.getAvailablePorts()).isEqualTo(123);
         assertThat(device.getExchange().getCode()).isEqualTo("exchangeCode");
         assertThat(device.getExchange().getName()).isEqualTo("exchangeName");
         assertThat(device.getExchange().getPostCode()).isEqualTo("exchangePostcode");
@@ -95,13 +99,15 @@ public class BroadbandAccessDeviceDatabaseDataProviderTest {
         when(jdbcTemplate.queryForObject(anyString(), eq(String.class), eq(hostname))).thenReturn(serialNumber);
     }
 
-    private void givenThereIsADevice(String exchangeCode, String exchangeName, String exchangePostcode, String hostname, String serialNumber) {
+    private void givenThereIsADevice(String exchangeCode, String exchangeName, String exchangePostcode, String hostname, String serialNumber, DeviceType type, int availablePorts) {
         Map<String, Object> details = new HashMap<>();
         details.put("ex_code", exchangeCode);
         details.put("ex_name", exchangeName);
         details.put("ex_postcode", exchangePostcode);
         details.put("hostname", hostname);
         details.put("serial_number", serialNumber);
+        details.put("type", type.name());
+        details.put("available_ports", new BigDecimal(availablePorts));
         when(jdbcTemplate.queryForMap(anyString(), anyVararg())).thenReturn(details);
     }
 

@@ -1,6 +1,7 @@
 package com.clean.example.integration.database.broadbandaccessdevice;
 
 import com.clean.example.core.domain.BroadbandAccessDevice;
+import com.clean.example.core.domain.DeviceType;
 import com.clean.example.core.domain.Exchange;
 import com.clean.example.dataproviders.database.broadbandaccessdevice.BroadbandAccessDeviceDatabaseDataProvider;
 import com.clean.example.dataproviders.database.exchange.ExchangeDatabaseDataProvider;
@@ -43,7 +44,7 @@ public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegr
 
     @Test
     public void getsTheSerialNumberOfADevice() throws Exception {
-        givenABroadbandAccessDevice("hostname1", "serialNumber1");
+        givenABroadbandAccessDevice("hostname1", "serialNumber1", DeviceType.FIBRE);
 
         String serialNumber = broadbandAccessDeviceDatabaseDataProvider.getSerialNumber("hostname1");
 
@@ -52,7 +53,7 @@ public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegr
 
     @Test
     public void updatesSerialNumberOfADevice() throws Exception {
-        givenABroadbandAccessDevice("hostname1", "serialNumber1");
+        givenABroadbandAccessDevice("hostname1", "serialNumber1", DeviceType.FIBRE);
 
         broadbandAccessDeviceDatabaseDataProvider.updateSerialNumber("hostname1", "newSerialNumber");
 
@@ -62,12 +63,14 @@ public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegr
 
     @Test
     public void getsDeviceDetails() throws Exception {
-        givenABroadbandAccessDevice("hostname1", "serialNumber1");
+        givenABroadbandAccessDevice("hostname1", "serialNumber1", DeviceType.FIBRE, 123);
 
         BroadbandAccessDevice device = broadbandAccessDeviceDatabaseDataProvider.getDetails("hostname1");
 
         assertThat(device.getHostname()).isEqualTo("hostname1");
         assertThat(device.getSerialNumber()).isEqualTo("serialNumber1");
+        assertThat(device.getType()).isEqualTo(DeviceType.FIBRE);
+        assertThat(device.getAvailablePorts()).isEqualTo(123);
         assertThat(device.getExchange().getCode()).isEqualTo(EXCHANGE_CODE);
         assertThat(device.getExchange().getName()).isEqualTo(EXCHANGE_NAME);
         assertThat(device.getExchange().getPostCode()).isEqualTo(EXCHANGE_POSTCODE);
@@ -83,10 +86,14 @@ public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegr
     }
 
     private void givenABroadbandAccessDevice(String hostname) {
-        givenABroadbandAccessDevice(hostname, "aSerialNumber");
+        givenABroadbandAccessDevice(hostname, "aSerialNumber", DeviceType.FIBRE);
     }
 
-    private void givenABroadbandAccessDevice(String hostname, String serialNumber) {
-        broadbandAccessDeviceDatabaseDataProvider.insert(EXCHANGE_CODE, hostname, serialNumber);
+    private void givenABroadbandAccessDevice(String hostname, String serialNumber, DeviceType deviceType) {
+        broadbandAccessDeviceDatabaseDataProvider.insert(EXCHANGE_CODE, hostname, serialNumber, deviceType);
+    }
+
+    private void givenABroadbandAccessDevice(String hostname, String serialNumber, DeviceType deviceType, int availablePorts) {
+        broadbandAccessDeviceDatabaseDataProvider.insert(EXCHANGE_CODE, hostname, serialNumber, deviceType, availablePorts);
     }
 }
