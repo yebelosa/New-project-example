@@ -1,22 +1,42 @@
 package com.clean.example.core.usecase.exchange.getcapacity;
 
+import com.clean.example.core.domain.BroadbandAccessDevice;
 import com.clean.example.core.domain.Capacity;
+import com.clean.example.core.domain.DeviceType;
+
+import java.util.List;
 
 public class GetCapacityForExchangeUseCase {
 
-    public GetCapacityForExchangeUseCase(GetAvailablePortsOfAllDevicesInExchange getAvailablePortsOfAllDevicesInExchange) {
+    private static final int MINIMUM_NUMBER_OF_PORTS = 5;
 
+    private GetAvailablePortsOfAllDevicesInExchange getAvailablePortsOfAllDevicesInExchange;
+
+    public GetCapacityForExchangeUseCase(GetAvailablePortsOfAllDevicesInExchange getAvailablePortsOfAllDevicesInExchange) {
+        this.getAvailablePortsOfAllDevicesInExchange = getAvailablePortsOfAllDevicesInExchange;
     }
 
     public Capacity getCapacity(String exchangeCode) {
-        // Exchange exchange = getExchangeFromModel(exchangeCode);
-        // loop(exchange.getDevices()) {
-        // int ports = device.getAvailablePorts();
-        // add to total for bb or fibre
-        // }
-        // decide getcapacity
-        // needs at least 5 available ports
-        return new Capacity(false, false);
+        List<BroadbandAccessDevice> devices = getAvailablePortsOfAllDevicesInExchange.getAvailablePortsOfAllDevicesInExchange(exchangeCode);
+
+        int adslAvailablePorts = 0;
+        int fibreAvailablePorts = 0;
+
+        for (BroadbandAccessDevice device : devices) {
+            if (device.getType() == DeviceType.ADSL) {
+                adslAvailablePorts += device.getAvailablePorts();
+            } else {
+                fibreAvailablePorts += device.getAvailablePorts();
+            }
+        }
+
+        boolean adsl = hasEnoughAvailablePorts(adslAvailablePorts);
+        boolean fibre = hasEnoughAvailablePorts(fibreAvailablePorts);
+        return new Capacity(adsl, fibre);
+    }
+
+    private boolean hasEnoughAvailablePorts(int availablePorts) {
+        return availablePorts >= MINIMUM_NUMBER_OF_PORTS;
     }
 
 }

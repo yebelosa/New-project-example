@@ -10,7 +10,6 @@ import com.googlecode.yatspec.junit.LinkingNote;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import static com.clean.example.core.domain.DeviceType.ADSL;
 import static com.clean.example.core.domain.DeviceType.FIBRE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Ignore("TODO enable when production code is ready")
 @LinkingNote(message = "Business Requirements: %s", links = {GetCapacityForExchangeAcceptanceTest.class})
 public class GetCapacityForExchangeEndToEndTest extends EndToEndYatspecTest {
 
@@ -125,8 +123,8 @@ public class GetCapacityForExchangeEndToEndTest extends EndToEndYatspecTest {
 
         String expectedResponse =
                 "{\n" +
-                        "  \"hasADSLCapacity\":\"" + adslCapacity + "\",\n" +
-                        "  \"hasFibreCapacity\":\"" + fibreCapacity + "\"\n" +
+                        "  \"hasADSLCapacity\":" + adslCapacity + ",\n" +
+                        "  \"hasFibreCapacity\":" + fibreCapacity + "\n" +
                 "}";
         JSONAssert.assertEquals(expectedResponse, responseContent, false);
     }

@@ -9,7 +9,6 @@ import com.clean.example.endtoend.exchange.getcapacity.GetCapacityForExchangeEnd
 import com.clean.example.yatspec.YatspecTest;
 import com.googlecode.yatspec.junit.LinkingNote;
 import com.googlecode.yatspec.junit.Notes;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -20,7 +19,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@Ignore("TODO enable when production code is ready")
 @Notes("Calculates the remaining capacity in an exchange in order to:\n" +
         "- decide what products can be sold to customers (ADSL, FIBRE, etc.)\n" +
         "- monitor remaining capacity and increase it when necessary")
