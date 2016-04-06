@@ -7,8 +7,14 @@ import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import static com.clean.example.core.domain.DeviceType.ADSL;
+import static com.clean.example.core.domain.DeviceType.FIBRE;
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -65,13 +71,13 @@ public class BroadbandAccessDeviceDatabaseDataProviderTest {
 
     @Test
     public void returnsTheDetailsOfADevice() throws Exception {
-        givenThereIsADevice("exchangeCode", "exchangeName", "exchangePostcode", "hostname", "serialNumber", DeviceType.ADSL, 123);
+        givenThereIsADevice("exchangeCode", "exchangeName", "exchangePostcode", "hostname", "serialNumber", ADSL, 123);
 
         BroadbandAccessDevice device = broadbandAccessDeviceDatabaseDataProvider.getDetails("hostname");
 
         assertThat(device.getHostname()).isEqualTo("hostname");
         assertThat(device.getSerialNumber()).isEqualTo("serialNumber");
-        assertThat(device.getType()).isEqualTo(DeviceType.ADSL);
+        assertThat(device.getType()).isEqualTo(ADSL);
         assertThat(device.getAvailablePorts()).isEqualTo(123);
         assertThat(device.getExchange().getCode()).isEqualTo("exchangeCode");
         assertThat(device.getExchange().getName()).isEqualTo("exchangeName");
@@ -87,6 +93,19 @@ public class BroadbandAccessDeviceDatabaseDataProviderTest {
         assertThat(device).isNull();
     }
 
+    @Test
+    public void returnsAvailablePortsOfAllDevicesInAnExchange() throws Exception {
+        Map<String, Object> device1 = detailsForDevice("exchangeCode", "exchangeName", "exchangePostcode1", "hostname1", "serialNumber1", ADSL, 2);
+        Map<String, Object> device2 = detailsForDevice("exchangeCode", "exchangeName", "exchangePostcode2", "hostname2", "serialNumber2", FIBRE, 4);
+        when(jdbcTemplate.queryForList(anyString(), eq("exchangeCode"))).thenReturn(asList(device1, device2));
+
+        List<BroadbandAccessDevice> broadbandAccessDevices = broadbandAccessDeviceDatabaseDataProvider.getAvailablePortsOfAllDevicesInExchange("exchangeCode");
+
+        assertThat(broadbandAccessDevices).hasSize(2);
+        thenTheDeviceHasAvailablePortsWithType(broadbandAccessDevices.get(0), 2, ADSL);
+        thenTheDeviceHasAvailablePortsWithType(broadbandAccessDevices.get(1), 4, FIBRE);
+    }
+
     private void givenThereAreNoDevices() {
         when(jdbcTemplate.queryForList(anyString(), eq(String.class))).thenReturn(new ArrayList<>());
     }
@@ -100,6 +119,11 @@ public class BroadbandAccessDeviceDatabaseDataProviderTest {
     }
 
     private void givenThereIsADevice(String exchangeCode, String exchangeName, String exchangePostcode, String hostname, String serialNumber, DeviceType type, int availablePorts) {
+        Map<String, Object> details = detailsForDevice(exchangeCode, exchangeName, exchangePostcode, hostname, serialNumber, type, availablePorts);
+        when(jdbcTemplate.queryForMap(anyString(), anyVararg())).thenReturn(details);
+    }
+
+    private Map<String, Object> detailsForDevice(String exchangeCode, String exchangeName, String exchangePostcode, String hostname, String serialNumber, DeviceType type, int availablePorts) {
         Map<String, Object> details = new HashMap<>();
         details.put("ex_code", exchangeCode);
         details.put("ex_name", exchangeName);
@@ -108,7 +132,7 @@ public class BroadbandAccessDeviceDatabaseDataProviderTest {
         details.put("serial_number", serialNumber);
         details.put("type", type.name());
         details.put("available_ports", new BigDecimal(availablePorts));
-        when(jdbcTemplate.queryForMap(anyString(), anyVararg())).thenReturn(details);
+        return details;
     }
 
     private void givenThereIsntADevice() {
@@ -116,7 +140,12 @@ public class BroadbandAccessDeviceDatabaseDataProviderTest {
     }
 
     private void thereThereAreDevices(String... hostnames) {
-        when(jdbcTemplate.queryForList(anyString(), eq(String.class))).thenReturn(Arrays.asList(hostnames));
+        when(jdbcTemplate.queryForList(anyString(), eq(String.class))).thenReturn(asList(hostnames));
+    }
+
+    private void thenTheDeviceHasAvailablePortsWithType(BroadbandAccessDevice device, int expectedAvailablePorts, DeviceType expectedType) {
+        assertThat(device.getAvailablePorts()).isEqualTo(expectedAvailablePorts);
+        assertThat(device.getType()).isEqualTo(expectedType);
     }
 
 }

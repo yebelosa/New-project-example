@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+import static com.clean.example.core.domain.DeviceType.ADSL;
+import static com.clean.example.core.domain.DeviceType.FIBRE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegrationTest {
@@ -29,7 +31,7 @@ public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegr
     @Before
     public void setUp() throws Exception {
         cleanUpDatabase();
-        givenAnExistingExchange();
+        givenAnExistingExchange(EXCHANGE_CODE);
     }
 
     @Test
@@ -44,7 +46,7 @@ public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegr
 
     @Test
     public void getsTheSerialNumberOfADevice() throws Exception {
-        givenABroadbandAccessDevice("hostname1", "serialNumber1", DeviceType.FIBRE);
+        givenABroadbandAccessDevice("hostname1", "serialNumber1", FIBRE);
 
         String serialNumber = broadbandAccessDeviceDatabaseDataProvider.getSerialNumber("hostname1");
 
@@ -53,7 +55,7 @@ public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegr
 
     @Test
     public void updatesSerialNumberOfADevice() throws Exception {
-        givenABroadbandAccessDevice("hostname1", "serialNumber1", DeviceType.FIBRE);
+        givenABroadbandAccessDevice("hostname1", "serialNumber1", FIBRE);
 
         broadbandAccessDeviceDatabaseDataProvider.updateSerialNumber("hostname1", "newSerialNumber");
 
@@ -63,17 +65,32 @@ public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegr
 
     @Test
     public void getsDeviceDetails() throws Exception {
-        givenABroadbandAccessDevice("hostname1", "serialNumber1", DeviceType.FIBRE, 123);
+        givenABroadbandAccessDevice("hostname1", "serialNumber1", FIBRE, 123);
 
         BroadbandAccessDevice device = broadbandAccessDeviceDatabaseDataProvider.getDetails("hostname1");
 
         assertThat(device.getHostname()).isEqualTo("hostname1");
         assertThat(device.getSerialNumber()).isEqualTo("serialNumber1");
-        assertThat(device.getType()).isEqualTo(DeviceType.FIBRE);
+        assertThat(device.getType()).isEqualTo(FIBRE);
         assertThat(device.getAvailablePorts()).isEqualTo(123);
         assertThat(device.getExchange().getCode()).isEqualTo(EXCHANGE_CODE);
         assertThat(device.getExchange().getName()).isEqualTo(EXCHANGE_NAME);
         assertThat(device.getExchange().getPostCode()).isEqualTo(EXCHANGE_POSTCODE);
+    }
+
+    @Test
+    public void returnsAvailablePortsOfAllDevicesInExchange() throws Exception {
+        givenABroadbandAccessDevice(EXCHANGE_CODE, "hostname1", "serialNumber1", FIBRE, 123);
+        givenABroadbandAccessDevice(EXCHANGE_CODE, "hostname2", "serialNumber2", ADSL, 456);
+
+        givenAnExistingExchange("exch2");
+        givenABroadbandAccessDevice("exch2", "hostname3", "serialNumber3", ADSL, 999);
+
+        List<BroadbandAccessDevice> broadbandAccessDevices = broadbandAccessDeviceDatabaseDataProvider.getAvailablePortsOfAllDevicesInExchange(EXCHANGE_CODE);
+
+        assertThat(broadbandAccessDevices).hasSize(2);
+        thenTheDeviceHasAvailablePortsWithType(broadbandAccessDevices.get(0), 123, FIBRE);
+        thenTheDeviceHasAvailablePortsWithType(broadbandAccessDevices.get(1), 456, ADSL);
     }
 
     private void cleanUpDatabase() {
@@ -81,12 +98,12 @@ public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegr
         jdbcTemplate.update("DELETE FROM CLEAN_ARCHITECTURE.EXCHANGE");
     }
 
-    private void givenAnExistingExchange() {
-        exchangeDatabaseDataProvider.insert(new Exchange(EXCHANGE_CODE, EXCHANGE_NAME, EXCHANGE_POSTCODE));
+    private void givenAnExistingExchange(String exchangeCode) {
+        exchangeDatabaseDataProvider.insert(new Exchange(exchangeCode, EXCHANGE_NAME, EXCHANGE_POSTCODE));
     }
 
     private void givenABroadbandAccessDevice(String hostname) {
-        givenABroadbandAccessDevice(hostname, "aSerialNumber", DeviceType.FIBRE);
+        givenABroadbandAccessDevice(hostname, "aSerialNumber", FIBRE);
     }
 
     private void givenABroadbandAccessDevice(String hostname, String serialNumber, DeviceType deviceType) {
@@ -94,6 +111,16 @@ public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegr
     }
 
     private void givenABroadbandAccessDevice(String hostname, String serialNumber, DeviceType deviceType, int availablePorts) {
-        broadbandAccessDeviceDatabaseDataProvider.insert(EXCHANGE_CODE, hostname, serialNumber, deviceType, availablePorts);
+        givenABroadbandAccessDevice(EXCHANGE_CODE, hostname, serialNumber, deviceType, availablePorts);
     }
+
+    private void givenABroadbandAccessDevice(String exchangeCode, String hostname, String serialNumber, DeviceType deviceType, int availablePorts) {
+        broadbandAccessDeviceDatabaseDataProvider.insert(exchangeCode, hostname, serialNumber, deviceType, availablePorts);
+    }
+
+    private void thenTheDeviceHasAvailablePortsWithType(BroadbandAccessDevice device, int expectedAvailablePorts, DeviceType expectedType) {
+        assertThat(device.getAvailablePorts()).isEqualTo(expectedAvailablePorts);
+        assertThat(device.getType()).isEqualTo(expectedType);
+    }
+
 }
