@@ -65,3 +65,6 @@ Explain what the domain used in the example is
 
 ## Resources
 **TODO**
+
+## Contacts
+**TODO leave contacts for people to ask questions**
