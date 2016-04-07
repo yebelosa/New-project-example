@@ -18,25 +18,24 @@ public class GetCapacityForExchangeUseCase {
 
     public Capacity getCapacity(String exchangeCode) {
         List<BroadbandAccessDevice> devices = getAvailablePortsOfAllDevicesInExchange.getAvailablePortsOfAllDevicesInExchange(exchangeCode);
-
-        int adslAvailablePorts = 0;
-        int fibreAvailablePorts = 0;
-
-        for (BroadbandAccessDevice device : devices) {
-            if (device.getType() == DeviceType.ADSL) {
-                adslAvailablePorts += device.getAvailablePorts();
-            } else {
-                fibreAvailablePorts += device.getAvailablePorts();
-            }
-        }
-
-        boolean adsl = hasEnoughAvailablePorts(adslAvailablePorts);
-        boolean fibre = hasEnoughAvailablePorts(fibreAvailablePorts);
+        boolean adsl = hasCapacityFor(devices, DeviceType.ADSL);
+        boolean fibre = hasCapacityFor(devices, DeviceType.FIBRE);
         return new Capacity(adsl, fibre);
     }
 
-    private boolean hasEnoughAvailablePorts(int availablePorts) {
+    private boolean hasCapacityFor(List<BroadbandAccessDevice> devices, DeviceType deviceType) {
+        int availablePorts = countAvailablePortsForType(devices, deviceType);
         return availablePorts >= MINIMUM_NUMBER_OF_PORTS;
+    }
+
+    private int countAvailablePortsForType(List<BroadbandAccessDevice> devices, DeviceType deviceType) {
+        int availablePorts = 0;
+        for (BroadbandAccessDevice device : devices) {
+            if (device.getType() == deviceType) {
+                availablePorts += device.getAvailablePorts();
+            }
+        }
+        return availablePorts;
     }
 
 }
