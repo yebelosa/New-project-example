@@ -1,9 +1,9 @@
 package com.clean.example.configuration;
 
 import com.clean.example.core.usecase.broadbandaccessdevice.reconcile.ReconcileBroadbandAccessDevicesUseCase;
-import com.clean.example.entrypoints.job.JobResults;
-import com.clean.example.entrypoints.job.ScheduledJob;
 import com.clean.example.entrypoints.job.broadbandaccessdevice.ReconcileBroadbandAccessDeviceJob;
+import com.clean.example.entrypoints.job.scheduledjob.JobResults;
+import com.clean.example.entrypoints.job.scheduledjob.ScheduledJob;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -1,4 +1,4 @@
-package com.clean.example.entrypoints.job;
+package com.clean.example.entrypoints.job.scheduledjob;
 
 public class JobResultsCount {
 

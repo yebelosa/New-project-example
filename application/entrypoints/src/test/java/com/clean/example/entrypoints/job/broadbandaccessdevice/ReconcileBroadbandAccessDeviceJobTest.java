@@ -3,8 +3,8 @@ package com.clean.example.entrypoints.job.broadbandaccessdevice;
 import com.clean.example.core.usecase.broadbandaccessdevice.reconcile.ReconcileBroadbandAccessDevicesUseCase;
 import com.clean.example.core.usecase.job.OnFailure;
 import com.clean.example.core.usecase.job.OnSuccess;
-import com.clean.example.entrypoints.job.JobResults;
-import com.clean.example.entrypoints.job.JobResultsCount;
+import com.clean.example.entrypoints.job.scheduledjob.JobResults;
+import com.clean.example.entrypoints.job.scheduledjob.JobResultsCount;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 

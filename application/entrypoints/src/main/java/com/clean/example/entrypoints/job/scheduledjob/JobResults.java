@@ -1,4 +1,4 @@
-package com.clean.example.entrypoints.job;
+package com.clean.example.entrypoints.job.scheduledjob;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

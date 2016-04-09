@@ -9,7 +9,7 @@ import com.clean.example.dataproviders.database.exchange.ExchangeDatabaseDataPro
 import com.clean.example.dataproviders.network.deviceclient.DeviceClient;
 import com.clean.example.dataproviders.network.deviceclient.DeviceConnectionTimeoutException;
 import com.clean.example.endtoend.EndToEndYatspecTest;
-import com.clean.example.entrypoints.job.ScheduledJob;
+import com.clean.example.entrypoints.job.scheduledjob.ScheduledJob;
 import com.googlecode.yatspec.junit.LinkingNote;
 import org.junit.Before;
 import org.junit.Test;
