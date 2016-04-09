@@ -93,11 +93,6 @@ public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegr
         thenTheDeviceHasAvailablePortsWithType(broadbandAccessDevices.get(1), 456, ADSL);
     }
 
-    private void cleanUpDatabase() {
-        jdbcTemplate.update("DELETE FROM CLEAN_ARCHITECTURE.BB_ACCESS_DEVICE");
-        jdbcTemplate.update("DELETE FROM CLEAN_ARCHITECTURE.EXCHANGE");
-    }
-
     private void givenAnExistingExchange(String exchangeCode) {
         exchangeDatabaseDataProvider.insert(new Exchange(exchangeCode, EXCHANGE_NAME, EXCHANGE_POSTCODE));
     }

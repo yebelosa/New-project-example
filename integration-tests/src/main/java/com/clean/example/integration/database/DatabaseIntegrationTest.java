@@ -10,4 +10,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(classes = {DatasourceConfiguration.class, DatabaseDataProviderConfiguration.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class DatabaseIntegrationTest extends AbstractTransactionalJUnit4SpringContextTests {
+
+    protected void cleanUpDatabase() {
+        jdbcTemplate.update("DELETE FROM CLEAN_ARCHITECTURE.BB_ACCESS_DEVICE");
+        jdbcTemplate.update("DELETE FROM CLEAN_ARCHITECTURE.EXCHANGE");
+    }
+
 }

@@ -3,12 +3,14 @@ package com.clean.example.businessrequirements.exchange.getcapacity;
 import com.clean.example.core.entity.BroadbandAccessDevice;
 import com.clean.example.core.entity.Capacity;
 import com.clean.example.core.entity.DeviceType;
+import com.clean.example.core.usecase.exchange.getcapacity.DoesExchangeExist;
 import com.clean.example.core.usecase.exchange.getcapacity.GetAvailablePortsOfAllDevicesInExchange;
 import com.clean.example.core.usecase.exchange.getcapacity.GetCapacityForExchangeUseCase;
 import com.clean.example.endtoend.exchange.getcapacity.GetCapacityForExchangeEndToEndTest;
 import com.clean.example.yatspec.YatspecTest;
 import com.googlecode.yatspec.junit.LinkingNote;
 import com.googlecode.yatspec.junit.Notes;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -28,10 +30,16 @@ public class GetCapacityForExchangeAcceptanceTest extends YatspecTest {
     private static final String EXCHANGE_CODE = "exch1";
     private static final String DEFAULT_SERIAL_NUMBER = "defaultSerialNumber";
 
+    DoesExchangeExist doesExchangeExist = mock(DoesExchangeExist.class);
     GetAvailablePortsOfAllDevicesInExchange getAvailablePortsOfAllDevicesInExchange = mock(GetAvailablePortsOfAllDevicesInExchange.class);
 
-    GetCapacityForExchangeUseCase getCapacityForExchangeUseCase = new GetCapacityForExchangeUseCase(getAvailablePortsOfAllDevicesInExchange);
-    private Capacity capacity;
+    GetCapacityForExchangeUseCase getCapacityForExchangeUseCase = new GetCapacityForExchangeUseCase(doesExchangeExist, getAvailablePortsOfAllDevicesInExchange);
+    Capacity capacity;
+
+    @Before
+    public void setUp() throws Exception {
+        givenExchangeExists();
+    }
 
     @Test
     public void hasAdslCapacityWhenThereAreAtLeast5AdslPortsAvailableAcrossAllDevices() throws Exception {
@@ -88,6 +96,10 @@ public class GetCapacityForExchangeAcceptanceTest extends YatspecTest {
     }
 
     // GIVENs
+    private void givenExchangeExists() {
+        when(doesExchangeExist.doesExchangeExist(EXCHANGE_CODE)).thenReturn(true);
+    }
+
     private void givenSomeAdslDevicesInTheExchangeWithMoreThan5AdslPortsAvailable() {
         BroadbandAccessDevice device1 = device("device1", ADSL, 2);
         BroadbandAccessDevice device2 = device("device2", ADSL, 2);

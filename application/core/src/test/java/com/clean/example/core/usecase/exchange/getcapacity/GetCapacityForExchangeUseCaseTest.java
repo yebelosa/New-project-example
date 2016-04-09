@@ -3,12 +3,14 @@ package com.clean.example.core.usecase.exchange.getcapacity;
 import com.clean.example.core.entity.BroadbandAccessDevice;
 import com.clean.example.core.entity.Capacity;
 import com.clean.example.core.entity.DeviceType;
+import org.junit.Before;
 import org.junit.Test;
 
 import static com.clean.example.core.entity.DeviceType.ADSL;
 import static com.clean.example.core.entity.DeviceType.FIBRE;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -17,9 +19,15 @@ public class GetCapacityForExchangeUseCaseTest {
     private static final String EXCHANGE_CODE = "exchangeCode";
     public static final int NO_PORTS = 0;
 
+    DoesExchangeExist doesExchangeExist = mock(DoesExchangeExist.class);
     GetAvailablePortsOfAllDevicesInExchange getAvailablePortsOfAllDevicesInExchange = mock(GetAvailablePortsOfAllDevicesInExchange.class);
 
-    GetCapacityForExchangeUseCase getCapacityForExchangeUseCase = new GetCapacityForExchangeUseCase(getAvailablePortsOfAllDevicesInExchange);
+    GetCapacityForExchangeUseCase getCapacityForExchangeUseCase = new GetCapacityForExchangeUseCase(doesExchangeExist, getAvailablePortsOfAllDevicesInExchange);
+
+    @Before
+    public void setUp() throws Exception {
+        givenExchangeExists();
+    }
 
     @Test
     public void noCapacityIfDevicesHaveNoPorts() throws Exception {
@@ -121,8 +129,26 @@ public class GetCapacityForExchangeUseCaseTest {
         assertThat(capacity.hasFibreCapacity()).isTrue();
     }
 
+    @Test
+    public void errorWhenExchangeDoesNotExist() throws Exception {
+        givenExchangeDoesNotExist();
+
+        assertThatExceptionOfType(ExchangeNotFoundException.class).isThrownBy(() ->
+                getCapacityForExchangeUseCase.getCapacity(EXCHANGE_CODE)
+        );
+
+    }
+
     private void givenDevices(BroadbandAccessDevice... broadbandAccessDevices) {
         when(getAvailablePortsOfAllDevicesInExchange.getAvailablePortsOfAllDevicesInExchange(EXCHANGE_CODE)).thenReturn(asList(broadbandAccessDevices));
+    }
+
+    private void givenExchangeExists() {
+        when(doesExchangeExist.doesExchangeExist(EXCHANGE_CODE)).thenReturn(true);
+    }
+
+    private void givenExchangeDoesNotExist() {
+        when(doesExchangeExist.doesExchangeExist(EXCHANGE_CODE)).thenReturn(false);
     }
 
     private BroadbandAccessDevice device(DeviceType deviceType, int availablePorts) {
