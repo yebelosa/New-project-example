@@ -18,9 +18,9 @@ public class GetCapacityForExchangeUseCase {
 
     public Capacity getCapacity(String exchangeCode) {
         List<BroadbandAccessDevice> devices = getAvailablePortsOfAllDevicesInExchange.getAvailablePortsOfAllDevicesInExchange(exchangeCode);
-        boolean adsl = hasCapacityFor(devices, DeviceType.ADSL);
-        boolean fibre = hasCapacityFor(devices, DeviceType.FIBRE);
-        return new Capacity(adsl, fibre);
+        boolean hasAdslCapacity = hasCapacityFor(devices, DeviceType.ADSL);
+        boolean hasFibreCapacity = hasCapacityFor(devices, DeviceType.FIBRE);
+        return new Capacity(hasAdslCapacity, hasFibreCapacity);
     }
 
     private boolean hasCapacityFor(List<BroadbandAccessDevice> devices, DeviceType deviceType) {
