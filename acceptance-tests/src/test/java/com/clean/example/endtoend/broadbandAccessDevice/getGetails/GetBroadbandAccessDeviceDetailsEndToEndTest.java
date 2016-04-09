@@ -1,8 +1,8 @@
 package com.clean.example.endtoend.broadbandAccessDevice.getGetails;
 
 import com.clean.example.businessrequirements.broadbandAccessDevice.getGetails.GetBroadbandAccessDeviceDetailsAcceptanceTest;
-import com.clean.example.core.domain.DeviceType;
-import com.clean.example.core.domain.Exchange;
+import com.clean.example.core.entity.DeviceType;
+import com.clean.example.core.entity.Exchange;
 import com.clean.example.dataproviders.database.broadbandaccessdevice.BroadbandAccessDeviceDatabaseDataProvider;
 import com.clean.example.dataproviders.database.exchange.ExchangeDatabaseDataProvider;
 import com.clean.example.endtoend.EndToEndYatspecTest;
@@ -16,7 +16,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.cedarsoftware.util.io.JsonWriter.formatJson;
-import static com.clean.example.core.domain.DeviceType.ADSL;
+import static com.clean.example.core.entity.DeviceType.ADSL;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @LinkingNote(message = "Business Requirements: %s", links = {GetBroadbandAccessDeviceDetailsAcceptanceTest.class})

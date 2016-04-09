@@ -1,8 +1,8 @@
 package com.clean.example.integration.rest.broadbandaccessdevice.getdetails;
 
-import com.clean.example.core.domain.BroadbandAccessDevice;
-import com.clean.example.core.domain.DeviceType;
-import com.clean.example.core.domain.Exchange;
+import com.clean.example.core.entity.BroadbandAccessDevice;
+import com.clean.example.core.entity.DeviceType;
+import com.clean.example.core.entity.Exchange;
 import com.clean.example.core.usecase.broadbandaccessdevice.getdetails.DeviceNotFoundException;
 import com.clean.example.core.usecase.broadbandaccessdevice.getdetails.GetBroadbandAccessDeviceDetailsUseCase;
 import com.clean.example.entrypoints.rest.broadbandaccessdevice.GetBroadbandAccessDeviceEndpoint;

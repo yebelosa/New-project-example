@@ -1,6 +1,6 @@
 package com.clean.example.dataproviders.database.exchange;
 
-import com.clean.example.core.domain.Exchange;
+import com.clean.example.core.entity.Exchange;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class ExchangeDatabaseDataProvider {

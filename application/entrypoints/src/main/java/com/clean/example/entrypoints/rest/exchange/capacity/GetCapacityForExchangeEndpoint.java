@@ -1,6 +1,6 @@
 package com.clean.example.entrypoints.rest.exchange.capacity;
 
-import com.clean.example.core.domain.Capacity;
+import com.clean.example.core.entity.Capacity;
 import com.clean.example.core.usecase.exchange.getcapacity.ExchangeNotFoundException;
 import com.clean.example.core.usecase.exchange.getcapacity.GetCapacityForExchangeUseCase;
 import com.clean.example.entrypoints.rest.exception.NotFoundException;

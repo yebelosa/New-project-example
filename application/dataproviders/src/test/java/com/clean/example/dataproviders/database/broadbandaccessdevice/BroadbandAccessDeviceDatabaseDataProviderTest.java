@@ -1,7 +1,7 @@
 package com.clean.example.dataproviders.database.broadbandaccessdevice;
 
-import com.clean.example.core.domain.BroadbandAccessDevice;
-import com.clean.example.core.domain.DeviceType;
+import com.clean.example.core.entity.BroadbandAccessDevice;
+import com.clean.example.core.entity.DeviceType;
 import org.junit.Test;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.clean.example.core.domain.DeviceType.ADSL;
-import static com.clean.example.core.domain.DeviceType.FIBRE;
+import static com.clean.example.core.entity.DeviceType.ADSL;
+import static com.clean.example.core.entity.DeviceType.FIBRE;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyString;

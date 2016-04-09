@@ -1,12 +1,12 @@
 package com.clean.example.core.usecase.exchange.getcapacity;
 
-import com.clean.example.core.domain.BroadbandAccessDevice;
-import com.clean.example.core.domain.Capacity;
-import com.clean.example.core.domain.DeviceType;
+import com.clean.example.core.entity.BroadbandAccessDevice;
+import com.clean.example.core.entity.Capacity;
+import com.clean.example.core.entity.DeviceType;
 import org.junit.Test;
 
-import static com.clean.example.core.domain.DeviceType.ADSL;
-import static com.clean.example.core.domain.DeviceType.FIBRE;
+import static com.clean.example.core.entity.DeviceType.ADSL;
+import static com.clean.example.core.entity.DeviceType.FIBRE;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;

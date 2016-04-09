@@ -1,6 +1,6 @@
 package com.clean.example.core.usecase.broadbandaccessdevice.getdetails;
 
-import com.clean.example.core.domain.BroadbandAccessDevice;
+import com.clean.example.core.entity.BroadbandAccessDevice;
 
 public interface GetDeviceDetails {
 

@@ -1,8 +1,8 @@
 package com.clean.example.dataproviders.database.broadbandaccessdevice;
 
-import com.clean.example.core.domain.BroadbandAccessDevice;
-import com.clean.example.core.domain.DeviceType;
-import com.clean.example.core.domain.Exchange;
+import com.clean.example.core.entity.BroadbandAccessDevice;
+import com.clean.example.core.entity.DeviceType;
+import com.clean.example.core.entity.Exchange;
 import com.clean.example.core.usecase.broadbandaccessdevice.getdetails.GetDeviceDetails;
 import com.clean.example.core.usecase.broadbandaccessdevice.reconcile.GetAllDeviceHostnames;
 import com.clean.example.core.usecase.broadbandaccessdevice.reconcile.GetSerialNumberFromModel;

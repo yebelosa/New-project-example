@@ -1,8 +1,8 @@
 package com.clean.example.integration.database.broadbandaccessdevice;
 
-import com.clean.example.core.domain.BroadbandAccessDevice;
-import com.clean.example.core.domain.DeviceType;
-import com.clean.example.core.domain.Exchange;
+import com.clean.example.core.entity.BroadbandAccessDevice;
+import com.clean.example.core.entity.DeviceType;
+import com.clean.example.core.entity.Exchange;
 import com.clean.example.dataproviders.database.broadbandaccessdevice.BroadbandAccessDeviceDatabaseDataProvider;
 import com.clean.example.dataproviders.database.exchange.ExchangeDatabaseDataProvider;
 import com.clean.example.integration.database.DatabaseIntegrationTest;
@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static com.clean.example.core.domain.DeviceType.ADSL;
-import static com.clean.example.core.domain.DeviceType.FIBRE;
+import static com.clean.example.core.entity.DeviceType.ADSL;
+import static com.clean.example.core.entity.DeviceType.FIBRE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BroadbandAccessDeviceDatabaseIntegrationTest extends DatabaseIntegrationTest {

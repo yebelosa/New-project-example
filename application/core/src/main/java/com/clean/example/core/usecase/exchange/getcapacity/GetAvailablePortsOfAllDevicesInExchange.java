@@ -1,6 +1,6 @@
 package com.clean.example.core.usecase.exchange.getcapacity;
 
-import com.clean.example.core.domain.BroadbandAccessDevice;
+import com.clean.example.core.entity.BroadbandAccessDevice;
 
 import java.util.List;
 

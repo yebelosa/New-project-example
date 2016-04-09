@@ -1,8 +1,8 @@
 package com.clean.example.businessrequirements.exchange.getcapacity;
 
-import com.clean.example.core.domain.BroadbandAccessDevice;
-import com.clean.example.core.domain.Capacity;
-import com.clean.example.core.domain.DeviceType;
+import com.clean.example.core.entity.BroadbandAccessDevice;
+import com.clean.example.core.entity.Capacity;
+import com.clean.example.core.entity.DeviceType;
 import com.clean.example.core.usecase.exchange.getcapacity.GetAvailablePortsOfAllDevicesInExchange;
 import com.clean.example.core.usecase.exchange.getcapacity.GetCapacityForExchangeUseCase;
 import com.clean.example.endtoend.exchange.getcapacity.GetCapacityForExchangeEndToEndTest;
@@ -13,8 +13,8 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static com.clean.example.core.domain.DeviceType.ADSL;
-import static com.clean.example.core.domain.DeviceType.FIBRE;
+import static com.clean.example.core.entity.DeviceType.ADSL;
+import static com.clean.example.core.entity.DeviceType.FIBRE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

@@ -1,4 +1,4 @@
-package com.clean.example.core.domain;
+package com.clean.example.core.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
