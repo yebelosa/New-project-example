@@ -57,6 +57,11 @@ Once the application is running, you can:
 - open <http://localhost:8080/broadbandaccessdevice/device1.exlon.com/> and you should see some json
 - look at the log and you should see a scheduled job running every 5 seconds (it prints something like _"Job Starting: ReconcileBroadbandAccessDeviceJob..."_)
 
+#### Importing the project in IntelliJ
+- Simply open the _build.gradle_ file and IntelliJ should load everything
+ #### Importing the project in Eclipse
+ - Make sure you've installed the Gradle plugin
+ - "Import existing project", choose Gradle, select the main folder and follow the instructions
 
 ## The example domain
 **TODO**
