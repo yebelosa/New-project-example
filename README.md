@@ -59,7 +59,8 @@ Once the application is running, you can:
 
 #### Importing the project in IntelliJ
 - Simply open the _build.gradle_ file and IntelliJ should load everything
- #### Importing the project in Eclipse
+
+#### Importing the project in Eclipse
  - Make sure you've installed the Gradle plugin
  - "Import existing project", choose Gradle, select the main folder and follow the instructions
 
