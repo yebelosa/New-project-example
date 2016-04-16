@@ -77,6 +77,9 @@ Of course, it comes at a cost:
 ![clean-architecture-diagram-1.png](docs/images/clean-architecture-diagram-1.png)
 ![clean-architecture-diagram-2.png](docs/images/clean-architecture-diagram-2.png)
 
+<img src="docs/images/clean-architecture-diagram-1.png" alt="clean-architecture-diagram-1.png" width="700">
+<img src="docs/images/clean-architecture-diagram-2.png" alt="clean-architecture-diagram-2.png" width="700">
+
 ***
 
 ## Testing Strategy
