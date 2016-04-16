@@ -93,7 +93,7 @@ Of course, it comes at a cost:
 * Demonstrate and document business requirements
 * “Business” documentation: What does the system do?
 * Test a use case in isolation, very fast (no GUI, no DB, etc.)
-* Use your favourite BDD framework (we use [Yatspec(https://github.com/bodar/yatspec)
+* Use your favourite BDD framework (we use [Yatspec](https://github.com/bodar/yatspec))
 
 ##### Integration Tests
 * Test integration with slow parts (http, database, etc.)
