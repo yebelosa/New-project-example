@@ -10,6 +10,7 @@ It was originally created to go together with [this presentation](TODO) (**TODO*
 * [Building and Running the application](#building-and-running-the-application)
 * [The example domain](#the-example-domain)
 * [Resources](#resources)
+* [Contacts](#contacts)
 
 ***
 
@@ -172,4 +173,7 @@ This example application is a simplified version of a real production applicatio
 ***
 
 ## Contacts
-**TODO leave contacts for people to ask questions**
+For any question or feedback (really appreciated!) feel free to contact me:
+* Email: mattia _(dot)_ battiston _(at)_ gmail.com
+* Twitter: [@BattistonMattia](https://twitter.com/BattistonMattia)
+* Linkedin: [Mattia Battiston](https://uk.linkedin.com/in/mattiabattiston)
