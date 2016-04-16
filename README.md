@@ -1,7 +1,7 @@
 # clean-architecture-example
 This is an example project to show what Clean Architecture would look like (in Java).
 
-It goes together with [this presentation](TODO) (**TODO** put link to presentation when published)
+It was originally created to go together with [this presentation](TODO) (**TODO** put link to presentation when published)
 
 **Table of Contents**
 * [Why Clean Architecture?](#why-clean-architecture)
@@ -13,7 +13,9 @@ It goes together with [this presentation](TODO) (**TODO** put link to presentati
 
 
 ## Why Clean Architecture?
-**TODO**
+Because
+> The center of your application is not the database. Nor is it one or more of the frameworks you may be using. **The center of your application are the use cases of your application**  -  _Unclebob_([source](https://blog.8thlight.com/uncle-bob/2012/05/15/NODB.html "NODB"))
+
 Explain what problem we're trying to solve
 Explain pros and cons
 
