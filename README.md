@@ -144,8 +144,7 @@ Once the application is running, you can:
 ***
 
 ## The example domain
-**TODO**
-Explain what the domain used in the example is
+<img src="docs/images/example-domain.png" alt="example-domain.png" width="700">
 
 ***
 
