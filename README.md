@@ -11,14 +11,16 @@ It was originally created to go together with [this presentation](TODO) (**TODO*
 * [The example domain](#the-example-domain)
 * [Resources](#resources)
 
+***
 
 ## Why Clean Architecture?
 Because
-> The center of your application is not the database. Nor is it one or more of the frameworks you may be using. **The center of your application are the use cases of your application**  -  _Unclebob_([source](https://blog.8thlight.com/uncle-bob/2012/05/15/NODB.html "NODB"))
+> The center of your application is not the database. Nor is it one or more of the frameworks you may be using. **The center of your application are the use cases of your application**  -  _Unclebob_ ([source](https://blog.8thlight.com/uncle-bob/2012/05/15/NODB.html "NODB"))
 
 Explain what problem we're trying to solve
 Explain pros and cons
 
+***
 
 ## Application Structure
 **TODO**
@@ -27,11 +29,13 @@ Include the diagram from the presentation when ready
 Show a sequence diagram for an API call
 Show a sequence diagram for a scheduled job
 
+***
 
 ## Testing Strategy
 **TODO**
 Explain how the testing pyramid is implemented
 
+***
 
 ## Building and Running the application
 - building the application:
@@ -66,13 +70,18 @@ Once the application is running, you can:
  - Make sure you've installed the Gradle plugin
  - "Import existing project", choose Gradle, select the main folder and follow the instructions
 
+***
+
 ## The example domain
 **TODO**
 Explain what the domain used in the example is
 
+***
 
 ## Resources
 **TODO**
+
+***
 
 ## Contacts
 **TODO leave contacts for people to ask questions**
