@@ -74,7 +74,8 @@ Of course, it comes at a cost:
 * Frameworks (e.g. for dependency injection) are isolated here
 * Has the "dirty details" like Main class, web server configuration, datasource configuration, etc.
 
-**TODO add picture of the diagram**
+![clean-architecture-diagram-1.png](docs/images/clean-architecture-diagram-1.png)
+![clean-architecture-diagram-2.png](docs/images/clean-architecture-diagram-2.png)
 
 ***
 
