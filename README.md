@@ -14,7 +14,6 @@ It was originally created to go together with [this presentation](TODO) (**TODO*
 ***
 
 ## Why Clean Architecture?
-Because
 > The center of your application is not the database. Nor is it one or more of the frameworks you may be using. **The center of your application are the use cases of your application**  -  _Unclebob_ ([source](https://blog.8thlight.com/uncle-bob/2012/05/15/NODB.html "NODB"))
 
 Clean architecture helps us solve, or at least mitigate, these common problems with architecture:
@@ -38,6 +37,12 @@ Clean architecture gives us all these benefits:
 * **We're always ready to deploy** by leaving the wiring up of the object for last or by using feature flags, so we get all the benefits of continuous integration (no need for feature branches)
 * **Swarming on stories** so that different pairs can easily work on the same story at the same time to complete it quicker
 * **Good monolith** with clear use cases that you can split in microservices later one, once you've learnt more about them
+
+Of course, it comes at a cost:
+* **Perceived duplication of code**. Entities might be represented differently when used in business logic, when dealing with the database and when presenting them in a json format. You might feel like you're duplicating code, but you're actually favouring _decoupling over DRY_
+* **You need interesting business logic** to "justify" the structure. If all you do in your use case is a one-line method to read or save from a database, then maybe you can get away with something simpler
+
+**TODO add picture of the recap**
 
 ***
 
