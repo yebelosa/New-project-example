@@ -109,42 +109,47 @@ Of course, it comes at a cost:
 ***
 
 ## Building and Running the application
-- building the application:
+* building the application:
 ```
 ./gradlew clean build
 ```
-- running the application (from the jar, after having built it):
+* running the application (from the jar, after having built it):
 ```
 java -jar application/build/clean-architecture-example.jar
 ```
-- running the application (on the fly):
+* running the application (on the fly):
 ```
 ./gradlew bootRun
 ```
-- running the application (in the IDE): open and run the main class
+* running the application (in the IDE): open and run the main class
 ```
 com.clean.example.configuration.Application
 ```
-- more info on available tasks:
+* more info on available tasks:
 ```
 ./gradlew tasks
 ```
 
 Once the application is running, you can:
-- open <http://localhost:8080/broadbandaccessdevice/device1.exlon.com/> and you should see some json
-- look at the log and you should see a scheduled job running every 5 seconds (it prints something like _"Job Starting: ReconcileBroadbandAccessDeviceJob..."_)
+* open <http://localhost:8080/broadbandaccessdevice/device1.exlon.com/> and you should see some json
+* look at the log and you should see a scheduled job running every 5 seconds (it prints something like _"Job Starting: ReconcileBroadbandAccessDeviceJob..."_)
 
 ##### Importing the project in IntelliJ
-- Simply open the _build.gradle_ file and IntelliJ should load everything
+* Simply open the _build.gradle_ file and IntelliJ should load everything
 
 ##### Importing the project in Eclipse
- - Make sure you've installed the Gradle plugin
- - "Import existing project", choose Gradle, select the main folder and follow the instructions
+* Make sure you've installed the Gradle plugin
+* "Import existing project", choose Gradle, select the main folder and follow the instructions
 
 ***
 
 ## The example domain
 <img src="docs/images/example-domain.png" alt="example-domain.png" width="700">
+
+This example application is a simplified version of a real production application that we develop at Sky. The domain is a telecommunication domain. It's a Network Inventory software that has the fulfill the following use cases:
+* Capacity of an exchange: how much available space have we got in a particular exchange? can we take on more customers in that area?
+* Reconcile devices: has anything changed in reality that we don't know of?
+* Get details of a particular device, by hostname
 
 ***
 
