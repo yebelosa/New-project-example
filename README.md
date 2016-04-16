@@ -80,7 +80,7 @@ Of course, it comes at a cost:
 ***
 
 ## Testing Strategy
-<img src="docs/images/clean-architecture-diagram-2.png" alt="clean-architecture-diagram-2.png" width="700">
+<img src="docs/images/testing-strategy.png" alt="testing-strategy.png" width="700">
 
 ##### Unit Tests
 * for TDD (a.k.a. Tests first, to drive design)
