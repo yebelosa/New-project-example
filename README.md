@@ -46,6 +46,9 @@ Of course, it comes at a cost:
 
 ## Application Structure
 
+<img src="docs/images/clean-architecture-diagram-1.png" alt="clean-architecture-diagram-1.png" width="700">
+<img src="docs/images/clean-architecture-diagram-2.png" alt="clean-architecture-diagram-2.png" width="700">
+
 #### Core: Entities
 * Represent your domain object
 * Apply only logic that is applicable in general to the whole entity (e.g. validating the format of an hostname)
@@ -73,12 +76,6 @@ Of course, it comes at a cost:
 * Wires everything together
 * Frameworks (e.g. for dependency injection) are isolated here
 * Has the "dirty details" like Main class, web server configuration, datasource configuration, etc.
-
-![clean-architecture-diagram-1.png](docs/images/clean-architecture-diagram-1.png)
-![clean-architecture-diagram-2.png](docs/images/clean-architecture-diagram-2.png)
-
-<img src="docs/images/clean-architecture-diagram-1.png" alt="clean-architecture-diagram-1.png" width="700">
-<img src="docs/images/clean-architecture-diagram-2.png" alt="clean-architecture-diagram-2.png" width="700">
 
 ***
 
