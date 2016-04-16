@@ -42,16 +42,39 @@ Of course, it comes at a cost:
 * **Perceived duplication of code**. Entities might be represented differently when used in business logic, when dealing with the database and when presenting them in a json format. You might feel like you're duplicating code, but you're actually favouring _decoupling over DRY_
 * **You need interesting business logic** to "justify" the structure. If all you do in your use case is a one-line method to read or save from a database, then maybe you can get away with something simpler
 
-**TODO add picture of the recap**
-
 ***
 
 ## Application Structure
-**TODO**
-Explain what the different modules do
-Include the diagram from the presentation when ready
-Show a sequence diagram for an API call
-Show a sequence diagram for a scheduled job
+
+#### Core: Entities
+* Represent your domain object
+* Apply only logic that is applicable in general to the whole entity (e.g. validating the format of an hostname)
+* Plain java objects: no frameworks, no annotations
+
+#### Core: Use Cases
+* Represent your business actions, it’s what you can do with the application. Expect one use case for each business action
+* Pure business logic, plain java (expect maybe some utils libraries like StringUtils)
+* Define interfaces for the data that they need in order to apply some logic. One or more dataproviders will implement the interface, but the use case doesn’t know where the data is coming from
+* The use case doesn't know who triggered it and how the results are going to be presented (e.g. could be on a web page, or returned as json, or simply logged, etc.)
+* Throws business exceptions
+
+#### Dataproviders
+* Retrieve and store data from and to a number of sources (database, network devices, file system, 3rd parties, etc.)
+* Implement the interfaces defined by the use case
+* Use whatever framework is most appropriate (they are going to be isolated here anyway)
+* Note: if using an ORM for database access, here you'd have another set of objects in order to represent the mapping to the tables (don't use the core entities as they might be very different)
+
+#### Entrypoints
+* Are ways to interact with the application, and typically involve a delivery mechanism (e.g. REST APIs, scheduled jobs, GUI, other systems)
+* Trigger a use case and convert the result to the appropriate format for the delivery mechanism
+* A GUI would use MVC (or MVP) in here; the controller would trigger a use case
+
+#### Configuration
+* Wires everything together
+* Frameworks (e.g. for dependency injection) are isolated here
+* Has the "dirty details" like Main class, web server configuration, datasource configuration, etc.
+
+**TODO add picture of the diagram**
 
 ***
 
