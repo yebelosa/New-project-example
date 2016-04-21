@@ -78,6 +78,11 @@ Of course, it comes at a cost:
 * Frameworks (e.g. for dependency injection) are isolated here
 * Has the "dirty details" like Main class, web server configuration, datasource configuration, etc.
 
+##### _Examples_
+<img src="docs/images/example-1.png" alt="clean-architecture-diagram-1.png" width="700">
+<img src="docs/images/example-2.png" alt="clean-architecture-diagram-1.png" width="700">
+
+
 ***
 
 ## Testing Strategy
