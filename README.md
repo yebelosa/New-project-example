@@ -15,7 +15,7 @@ It was originally created to go together with [this presentation](TODO) (**TODO*
 ***
 
 ## Why Clean Architecture?
-> The center of your application is not the database. Nor is it one or more of the frameworks you may be using. **The center of your application are the use cases of your application**  -  _Unclebob_ ([source](https://blog.8thlight.com/uncle-bob/2012/05/15/NODB.html "NODB"))
+> The center of your application is not the database. Nor is it one or more of the frameworks you may be using. **The center of your application is the use cases of your application**  -  _Unclebob_ ([source](https://blog.8thlight.com/uncle-bob/2012/05/15/NODB.html "NODB"))
 
 Clean architecture helps us solve, or at least mitigate, these common problems with architecture:
 * **Decisions are taken too early**, often at the beginning of a project, when we know the least about the problem that we have to solve
