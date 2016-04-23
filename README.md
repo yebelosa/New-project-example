@@ -1,7 +1,7 @@
 # clean-architecture-example
 This is an example project to show what Clean Architecture would look like (in Java).
 
-It was originally created to go together with [this presentation](TODO) (**TODO** put link to presentation when published)
+It was originally created to go together with [this presentation](http://www.slideshare.net/mattiabattiston/real-life-clean-architecture-61242830)
 
 **Table of Contents**
 * [Why Clean Architecture?](#why-clean-architecture)
@@ -162,7 +162,7 @@ This example application is a simplified version of a real production applicatio
 ## Resources
 
 ##### Presentation
-* Real Life Clean Architecture **TODO add link once published**
+* Real Life Clean Architecture http://www.slideshare.net/mattiabattiston/real-life-clean-architecture-61242830
 
 ##### Blogs & Articles
 * The Clean Architecture https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html
