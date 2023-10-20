@@ -11,6 +11,9 @@ import org.springframework.context.annotation.Configuration;
 public class Application {
 
     public static void main(String[] args) {
+
+
+        int variable = 0;
         SpringApplication.run(Application.class, args);
     }
 
